@@ -9,7 +9,16 @@
 import UIKit
 
 class ViewController: UIViewController {
+    @IBOutlet weak var background: UIImageView!
+    @IBOutlet weak var button: UIButton!
 
+    @IBAction func changeColor(_ sender: Any) {
+        print("HELLO WORLD")
+        button.tintColor = UIColor.purple
+        button.setTitleColor(UIColor.purple, for: .normal)
+        background.image? = (background.image?.withRenderingMode(.alwaysTemplate))!
+        background.tintColor = UIColor.magenta
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
