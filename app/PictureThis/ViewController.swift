@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var button: UIButton!
 
     @IBAction func changeColor(_ sender: Any) {
-        print("HELLO WORLD")
+        print("ITAI SUCKS")
         button.tintColor = UIColor.purple
         button.setTitleColor(UIColor.purple, for: .normal)
         background.image? = (background.image?.withRenderingMode(.alwaysTemplate))!
