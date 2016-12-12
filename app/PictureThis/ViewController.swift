@@ -11,13 +11,6 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var logo: UIImageView!
     @IBOutlet weak var signUp: UIButton!
-    @IBAction func changeImage(_ sender: Any) {
-        if (logo.image == #imageLiteral(resourceName: "dog")) {
-            logo.image = #imageLiteral(resourceName: "Cat")
-        } else {
-            logo.image = #imageLiteral(resourceName: "dog")
-        }
-    }
     @IBOutlet weak var login: UIButton!
     
     override func viewDidLoad() {

@@ -8,30 +8,37 @@
 
 import UIKit
 
-class LogInController: UIViewController {
+class LogInController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var Username: UITextField!
-    var usernameCounter: Int = 0
-    var passwordCounter: Int = 0
     @IBOutlet weak var Password: UITextField!
+    var usernameBool: Bool = false
+    var passwordBool: Bool = false
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        Username.delegate = self
         // Do any additional setup after loading the view.
     }
 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        self.Password.becomeFirstResponder()
+        Password.text = ""
+        return true
+    }
+    
     @IBAction func eraseUsername(_ sender: Any) {
-        if (usernameCounter == 0) {
+        if (usernameBool == false) {
             Username.text = ""
         }
-        usernameCounter += 1
+        usernameBool = true
     }
 
     @IBAction func erasePassword(_ sender: Any) {
-        if (passwordCounter == 0) {
+        if (passwordBool == false) {
             Password.text = ""
         }
-        passwordCounter += 1
+        passwordBool = true
     }
     
     override func didReceiveMemoryWarning() {
