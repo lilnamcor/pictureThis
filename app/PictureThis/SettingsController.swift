@@ -8,12 +8,45 @@
 
 import UIKit
 
-class SettingsController: UIViewController {
+class SettingsController: UIViewController, UITextFieldDelegate {
 
+    @IBOutlet weak var Username: UITextField!
+    @IBOutlet weak var DateofBirth: UITextField!
+    @IBOutlet weak var Gender: UISegmentedControl!
+    @IBOutlet weak var Password: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        Username.delegate = self
+        Password.delegate = self
+        DateofBirth.delegate = self
+        Username.text = "PENIS"
+        Password.text = "*****"
+        DateofBirth.text = "10/15/1994"
+        
         // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view.
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        if (textField == self.Username) {
+            self.Password.becomeFirstResponder()
+        } else if (textField == self.Password) {
+            self.DateofBirth.becomeFirstResponder()
+        }
+        return true
+    }
+    
+    @IBAction func Username(_ sender: Any) {
+    }
+    
+    @IBAction func Password(_ sender: Any) {
+    }
+    
+    @IBAction func Gender(_ sender: Any) {
+    }
+    
+    @IBAction func DateofBirth(_ sender: Any) {
     }
 
     override func didReceiveMemoryWarning() {

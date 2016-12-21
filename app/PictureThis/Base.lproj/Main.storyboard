@@ -400,6 +400,9 @@
                                 <rect key="frame" x="274" y="28" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Edit"/>
+                                <connections>
+                                    <action selector="EditButtonAction:" destination="B0k-n0-8hh" eventType="touchUpInside" id="LAN-Eq-O1J"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Username" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U2p-cQ-5GK">
                                 <rect key="frame" x="123" y="93" width="97" height="30"/>
@@ -407,6 +410,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="Username:" destination="B0k-n0-8hh" eventType="editingDidEnd" id="TZ1-dt-LjI"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Password" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iyH-H4-iCg">
                                 <rect key="frame" x="123" y="143" width="97" height="30"/>
@@ -414,6 +420,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="Password:" destination="B0k-n0-8hh" eventType="editingDidEnd" id="m5H-P3-jUs"/>
+                                </connections>
                             </textField>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Dyv-s8-AeM">
                                 <rect key="frame" x="113" y="195" width="117" height="29"/>
@@ -422,6 +431,9 @@
                                     <segment title="Male"/>
                                     <segment title="Female"/>
                                 </segments>
+                                <connections>
+                                    <action selector="Gender:" destination="B0k-n0-8hh" eventType="valueChanged" id="cnp-t7-yCV"/>
+                                </connections>
                             </segmentedControl>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Birth Date" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ne8-NX-Hgp">
                                 <rect key="frame" x="123" y="249" width="97" height="30"/>
@@ -429,10 +441,19 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="DateofBirth:" destination="B0k-n0-8hh" eventType="editingDidEnd" id="J41-Od-ci0"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="DateofBirth" destination="ne8-NX-Hgp" id="10c-Lb-YSj"/>
+                        <outlet property="Gender" destination="Dyv-s8-AeM" id="nY5-X3-B2j"/>
+                        <outlet property="Password" destination="iyH-H4-iCg" id="Ytd-sT-H9C"/>
+                        <outlet property="Username" destination="U2p-cQ-5GK" id="r9e-xZ-qku"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bsH-CF-Yt4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
