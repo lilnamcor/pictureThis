@@ -29,10 +29,6 @@ class CameraController: UIViewController {
     
     @IBAction func sliderAction(_ sender: Any) {
         print(slider.value)
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
-        let blurView = UIVisualEffectView(effect: blurEffect)
-        blurView.frame = self.view.layer.bounds
-        self.view.bringSubview(toFront: blurView)
     }
     
     @IBAction func blurAction(_ sender: Any) {
@@ -59,6 +55,7 @@ class CameraController: UIViewController {
         disableButton(element: brightness)
         disableButton(element: blur)
         answer.isHidden = true
+        self.previewLayer?.isHidden = false
         enableButton(element: capture)
     }
     
@@ -95,8 +92,8 @@ class CameraController: UIViewController {
             stillImageOutput?.captureStillImageAsynchronously(from: videoConnection) {
                 (imageDataSampleBuffer, error) -> Void in
                 self.captureSession?.stopRunning()
+                self.previewLayer?.isHidden = true
                 let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataSampleBuffer)
-                print(imageData!)
                 self.imageView.image = UIImage(data: imageData!)
             }
         }
