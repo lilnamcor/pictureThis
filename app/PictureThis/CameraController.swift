@@ -21,25 +21,62 @@ class CameraController: UIViewController {
     @IBOutlet weak var flash: UIButton!
     @IBOutlet weak var answer: UITextField!
     
-    
+        
     @IBOutlet weak var imageView: UIImageView!
     var captureSession : AVCaptureSession?
     var stillImageOutput : AVCaptureStillImageOutput?
     var previewLayer : AVCaptureVideoPreviewLayer?
     
+    @IBAction func sliderAction(_ sender: Any) {
+        print(slider.value)
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.frame = self.view.layer.bounds
+        self.view.bringSubview(toFront: blurView)
+    }
+    
+    @IBAction func blurAction(_ sender: Any) {
+        slider.isHidden = false
+        slider.isEnabled = true
+    }
+    
+    func disableButton(element: UIButton) {
+        element.isHidden = true
+        element.isEnabled = false
+    }
+    
+    func enableButton(element: UIButton) {
+        element.isHidden = false
+        element.isEnabled = true
+    }
+    
+    @IBAction func flashAction(_ sender: Any) {
+        self.captureSession?.startRunning()
+        notifications.setTitle("notifications", for: .normal)
+        settings.setTitle("settings", for: .normal)
+        flash.setTitle("flash", for: .normal)
+        disableButton(element: zoom)
+        disableButton(element: brightness)
+        disableButton(element: blur)
+        answer.isHidden = true
+        enableButton(element: capture)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        slider.isContinuous = true
         
         notifications.setTitle("notifications", for: .normal)
         settings.setTitle("settings", for: .normal)
         flash.setTitle("flash", for: .normal)
         
         
-        slider.isHidden = true
-        zoom.isHidden = true
-        brightness.isHidden = true
-        blur.isHidden = true
+        disableButton(element: zoom)
+        disableButton(element: brightness)
+        disableButton(element: blur)
         answer.isHidden = true
+        slider.isHidden = true
+        slider.isEnabled = false
         // Do any additional setup after loading the view.
     }
     
@@ -54,15 +91,26 @@ class CameraController: UIViewController {
     }
     
     @IBAction func captureAction(_ sender: Any) {
+        if let videoConnection = stillImageOutput?.connection(withMediaType: AVMediaTypeVideo) {
+            stillImageOutput?.captureStillImageAsynchronously(from: videoConnection) {
+                (imageDataSampleBuffer, error) -> Void in
+                self.captureSession?.stopRunning()
+                let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataSampleBuffer)
+                print(imageData!)
+                self.imageView.image = UIImage(data: imageData!)
+            }
+        }
         notifications.setTitle("cancel", for: .normal)
         settings.setTitle("send", for: .normal)
         flash.setTitle("X", for: .normal)
-        zoom.isHidden = false
-        brightness.isHidden = false
-        blur.isHidden = false
+        enableButton(element: zoom)
+        enableButton(element: brightness)
+        enableButton(element: blur)
+        disableButton(element: capture)
+        
         answer.isHidden = false
-        capture.isHidden = true
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -93,6 +141,7 @@ class CameraController: UIViewController {
                 previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
                 previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
                 previewLayer?.connection.videoOrientation = AVCaptureVideoOrientation.portrait
+
                 imageView.layer.addSublayer(previewLayer!)
                 captureSession?.startRunning()
                 
