@@ -13,6 +13,7 @@
 		59AC323F1E08E02F0011882F /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AC323E1E08E02F0011882F /* CameraController.swift */; };
 		59DE635C1DFD145800B324E2 /* LogInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DE635B1DFD145800B324E2 /* LogInController.swift */; };
 		5F0F55931DFE147500FC5257 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0F55921DFE147500FC5257 /* SignUpController.swift */; };
+		5FAC2C821E08E64000E539BF /* FriendsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAC2C811E08E64000E539BF /* FriendsListController.swift */; };
 		5FD99C5A1DF512CF00D24256 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD99C591DF512CF00D24256 /* AppDelegate.swift */; };
 		5FD99C5C1DF512CF00D24256 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD99C5B1DF512CF00D24256 /* ViewController.swift */; };
 		5FD99C5F1DF512CF00D24256 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FD99C5D1DF512CF00D24256 /* Main.storyboard */; };
@@ -46,6 +47,7 @@
 		59AC323E1E08E02F0011882F /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		59DE635B1DFD145800B324E2 /* LogInController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInController.swift; sourceTree = "<group>"; };
 		5F0F55921DFE147500FC5257 /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
+		5FAC2C811E08E64000E539BF /* FriendsListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsListController.swift; sourceTree = "<group>"; };
 		5FD99C561DF512CF00D24256 /* PictureThis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PictureThis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FD99C591DF512CF00D24256 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5FD99C5B1DF512CF00D24256 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				5FD99C5B1DF512CF00D24256 /* ViewController.swift */,
 				59DE635B1DFD145800B324E2 /* LogInController.swift */,
 				5FD99C5D1DF512CF00D24256 /* Main.storyboard */,
+				5FAC2C811E08E64000E539BF /* FriendsListController.swift */,
 				59AC323E1E08E02F0011882F /* CameraController.swift */,
 				59AC323C1E08DF290011882F /* ChatController.swift */,
 				59AC323A1E08DF060011882F /* NotificationsController.swift */,
@@ -277,6 +280,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FAC2C821E08E64000E539BF /* FriendsListController.swift in Sources */,
 				59AC323B1E08DF060011882F /* NotificationsController.swift in Sources */,
 				5FD99C5C1DF512CF00D24256 /* ViewController.swift in Sources */,
 				59AC323D1E08DF290011882F /* ChatController.swift in Sources */,
