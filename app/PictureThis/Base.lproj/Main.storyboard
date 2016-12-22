@@ -203,7 +203,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Settings/Send"/>
                                 <connections>
-                                    <segue destination="B0k-n0-8hh" kind="show" id="juF-XE-Vph"/>
+                                    <action selector="sendAction:" destination="V4Q-qI-C97" eventType="touchUpInside" id="WQB-Pk-aXM"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oHW-v2-VOf">
@@ -215,9 +215,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z4p-nn-tzF">
-                                <rect key="frame" x="302" y="19" width="57" height="30"/>
+                                <rect key="frame" x="316" y="19" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Flip/Blur"/>
+                                <state key="normal" backgroundImage="Cat"/>
                                 <connections>
                                     <action selector="blurAction:" destination="V4Q-qI-C97" eventType="touchUpInside" id="ffa-Xe-vno"/>
                                 </connections>
@@ -231,14 +231,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2MA-IL-sIK">
-                                <rect key="frame" x="310" y="57" width="40" height="30"/>
+                                <rect key="frame" x="315" y="57" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Zoom"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X7J-0i-0k2">
-                                <rect key="frame" x="276" y="95" width="74" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Brightness"/>
+                                <state key="normal" backgroundImage="magnifying"/>
+                                <connections>
+                                    <action selector="zoomAction:" destination="V4Q-qI-C97" eventType="touchUpInside" id="JTb-h8-vCh"/>
+                                </connections>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="KUh-rJ-ZEy">
                                 <rect key="frame" x="65" y="539" width="244" height="31"/>
@@ -247,13 +245,24 @@
                                     <action selector="sliderAction:" destination="V4Q-qI-C97" eventType="valueChanged" id="7Zg-BG-ti3"/>
                                 </connections>
                             </slider>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Answer" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sy7-LZ-Awn">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="_ _ _ _" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sy7-LZ-Awn">
                                 <rect key="frame" x="139" y="19" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="answerAction:" destination="V4Q-qI-C97" eventType="editingDidBegin" id="ho2-sG-Os5"/>
+                                </connections>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X7J-0i-0k2">
+                                <rect key="frame" x="315" y="95" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="dog"/>
+                                <connections>
+                                    <action selector="brightnessAction:" destination="V4Q-qI-C97" eventType="touchUpInside" id="Zlm-5n-DbY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -274,16 +283,17 @@
                         <outlet property="settings" destination="Jvb-RZ-9Cl" id="Gvl-hP-Rh2"/>
                         <outlet property="slider" destination="KUh-rJ-ZEy" id="okJ-Pe-3fs"/>
                         <outlet property="zoom" destination="2MA-IL-sIK" id="CuR-E4-xlp"/>
+                        <segue destination="G9q-Sr-6eS" kind="show" identifier="FriendsList" id="m99-lY-SPr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9kG-aF-nsR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="882.39999999999998" y="-109.29535232383809"/>
         </scene>
-        <!--Friends List Controller-->
+        <!--FriendsList-->
         <scene sceneID="1Yp-16-LHb">
             <objects>
-                <viewController id="G9q-Sr-6eS" customClass="FriendsListController" customModule="PictureThis" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="FriendsList" id="G9q-Sr-6eS" customClass="FriendsListController" customModule="PictureThis" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IRd-BM-yBb"/>
                         <viewControllerLayoutGuide type="bottom" id="Xhg-lL-1Uc"/>
@@ -491,6 +501,11 @@
             </objects>
         </scene>
     </scenes>
+    <resources>
+        <image name="Cat" width="800" height="925"/>
+        <image name="dog" width="320" height="240"/>
+        <image name="magnifying" width="240" height="180"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="XPY-qz-m2H"/>
     </inferredMetricsTieBreakers>
