@@ -87,7 +87,7 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
                 blur.setImage(#imageLiteral(resourceName: "Blur"), for: .normal)
                 zoom.setImage(#imageLiteral(resourceName: "Logo"), for: .normal)
                 if (brightnessActive) {
-                    applyFilters(blur: Float(blurValue), brightness: 0.0)
+                    applyFilters(blur: Float(blurValue)*15+1, brightness: 0.0)
                 } else{
                     imageView.image = getImageFromCIImage(image: globalImage)
                 }
@@ -132,11 +132,12 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
         if (blurPressed) {
             blurValue = Double(slider.value)
             if (abs(blurValue - prevBlurValue) > 0.1) {
+                print(blurValue)
                 prevBlurValue = blurValue
                 if (brightnessActive) {
-                    applyFilters(blur: Float(blurValue)*10, brightness: Float(brightnessValue))
+                    applyFilters(blur: Float(blurValue)*15+1, brightness: Float(brightnessValue))
                 } else {
-                    applyFilters(blur: Float(blurValue)*10, brightness: 0.0)
+                    applyFilters(blur: Float(blurValue)*15+1, brightness: 0.0)
                 }
             }
         } else if (zoomPressed) {
@@ -145,7 +146,7 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
         } else {
             brightnessValue = Double(slider.value)
             if (blurActive) {
-                applyFilters(blur: Float(blurValue)*10, brightness: Float(brightnessValue))
+                applyFilters(blur: Float(blurValue)*15+1, brightness: Float(brightnessValue))
             } else {
                 applyFilters(blur: 0.0, brightness: Float(brightnessValue))
             }
@@ -171,9 +172,9 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
             notifications.isEnabled = true
             notifications.isHidden = false
             if (brightnessActive) {
-                applyFilters(blur: Float(blurValue)*10, brightness: Float(brightnessValue))
+                applyFilters(blur: Float(blurValue)*15+1, brightness: Float(brightnessValue))
             } else {
-                applyFilters(blur: Float(blurValue)*10, brightness: 0.0)
+                applyFilters(blur: Float(blurValue)*15+1, brightness: 0.0)
             }
         } else {
             slider.isHidden = true
@@ -238,7 +239,7 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
             notifications.isEnabled = true
             notifications.isHidden = false
             if (blurActive) {
-                applyFilters(blur: Float(blurValue)*10, brightness: Float(brightnessValue))
+                applyFilters(blur: Float(blurValue)*15+1, brightness: Float(brightnessValue))
             } else {
                 applyFilters(blur: 0.0, brightness: Float(brightnessValue))
             }
@@ -301,6 +302,7 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
         lockZoom()
         captureMode = false
         settings.setImage(#imageLiteral(resourceName: "Send"), for: .normal)
+        notifications.setImage(#imageLiteral(resourceName: "Undo"), for: .normal)
         notifications.isEnabled = false
         notifications.isHidden = true
         if let videoConnection = stillImageOutput?.connection(withMediaType: AVMediaTypeVideo) {
@@ -410,7 +412,7 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
         self.globalImage = CIImage(cgImage: aCGImage!)
         self.context = CIContext(options: nil)
         self.brightnessFilter = CIFilter(name: "CIColorControls")
-        self.blurFilter = CIFilter(name: "CIGaussianBlur")
+        self.blurFilter = CIFilter(name: "CIBoxBlur")
         
         self.scrollView.bouncesZoom = true
         self.scrollView.minimumZoomScale = 1.0;
