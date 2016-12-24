@@ -195,9 +195,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ydq-aO-9xF">
-                                <rect key="frame" x="0.0" y="-2" width="375" height="669"/>
-                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2XP-7J-ZVo">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dog" translatesAutoresizingMaskIntoConstraints="NO" id="ydq-aO-9xF">
+                                        <rect key="frame" x="0.0" y="-1" width="375" height="669"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <connections>
+                                    <outlet property="delegate" destination="V4Q-qI-C97" id="Ieq-62-S2n"/>
+                                </connections>
+                            </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EOT-K6-jGJ">
                                 <rect key="frame" x="16" y="577" width="71" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -282,7 +291,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="_ _ _ _" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sy7-LZ-Awn">
                                 <rect key="frame" x="139" y="19" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -305,10 +314,10 @@
                         </subviews>
                         <color key="backgroundColor" red="0.064831479057591568" green="0.064831479057591568" blue="0.064831479057591568" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="ydq-aO-9xF" firstAttribute="leading" secondItem="335-LY-cas" secondAttribute="leading" id="DvB-Py-alA"/>
-                            <constraint firstAttribute="trailing" secondItem="ydq-aO-9xF" secondAttribute="trailing" id="LFG-ye-SJB"/>
-                            <constraint firstItem="vv3-Zx-Ewj" firstAttribute="top" secondItem="ydq-aO-9xF" secondAttribute="bottom" id="jtm-Er-9Bv"/>
-                            <constraint firstItem="ydq-aO-9xF" firstAttribute="top" secondItem="335-LY-cas" secondAttribute="top" id="tQV-P0-UsV"/>
+                            <constraint firstItem="2XP-7J-ZVo" firstAttribute="top" secondItem="335-LY-cas" secondAttribute="top" id="Oob-6s-V9A"/>
+                            <constraint firstAttribute="trailing" secondItem="2XP-7J-ZVo" secondAttribute="trailing" id="Rx8-EC-ply"/>
+                            <constraint firstItem="2XP-7J-ZVo" firstAttribute="leading" secondItem="335-LY-cas" secondAttribute="leading" id="bIb-t3-S7G"/>
+                            <constraint firstItem="vv3-Zx-Ewj" firstAttribute="top" secondItem="2XP-7J-ZVo" secondAttribute="bottom" id="yBR-6K-6NR"/>
                         </constraints>
                     </view>
                     <connections>
@@ -319,6 +328,7 @@
                         <outlet property="flash" destination="NxX-9B-W68" id="SQI-R3-3UN"/>
                         <outlet property="imageView" destination="ydq-aO-9xF" id="ab7-ow-0Be"/>
                         <outlet property="notifications" destination="EOT-K6-jGJ" id="Po2-n2-YVD"/>
+                        <outlet property="scrollView" destination="2XP-7J-ZVo" id="9yj-yD-JRg"/>
                         <outlet property="settings" destination="Jvb-RZ-9Cl" id="Gvl-hP-Rh2"/>
                         <outlet property="slider" destination="KUh-rJ-ZEy" id="okJ-Pe-3fs"/>
                         <outlet property="zoom" destination="2MA-IL-sIK" id="CuR-E4-xlp"/>
@@ -566,6 +576,7 @@
         <image name="Logo" width="93" height="93"/>
         <image name="Notification" width="94" height="93"/>
         <image name="Settings" width="93" height="93"/>
+        <image name="dog" width="320" height="240"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Wyt-Jq-x1J"/>
