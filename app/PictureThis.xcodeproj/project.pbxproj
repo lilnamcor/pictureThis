@@ -21,6 +21,8 @@
 		5FD99C641DF512CF00D24256 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FD99C621DF512CF00D24256 /* LaunchScreen.storyboard */; };
 		5FD99C6F1DF512CF00D24256 /* PictureThisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD99C6E1DF512CF00D24256 /* PictureThisTests.swift */; };
 		5FD99C7A1DF512CF00D24256 /* PictureThisUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD99C791DF512CF00D24256 /* PictureThisUITests.swift */; };
+		5FEC42E51E0F710D007CC2F8 /* ImageFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FEC42E41E0F710C007CC2F8 /* ImageFilters.swift */; };
+		5FF909471E0EF6C600182BED /* CameraOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF909461E0EF6C600182BED /* CameraOperations.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		5FD99C751DF512CF00D24256 /* PictureThisUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PictureThisUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FD99C791DF512CF00D24256 /* PictureThisUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureThisUITests.swift; sourceTree = "<group>"; };
 		5FD99C7B1DF512CF00D24256 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5FEC42E41E0F710C007CC2F8 /* ImageFilters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageFilters.swift; sourceTree = "<group>"; };
+		5FF909461E0EF6C600182BED /* CameraOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraOperations.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +120,8 @@
 				59DE635B1DFD145800B324E2 /* LogInController.swift */,
 				5FAC2C811E08E64000E539BF /* FriendsListController.swift */,
 				59AC323E1E08E02F0011882F /* CameraController.swift */,
+				5FEC42E41E0F710C007CC2F8 /* ImageFilters.swift */,
+				5FF909461E0EF6C600182BED /* CameraOperations.swift */,
 				5FC63A231E0C71F1004423BE /* Main.storyboard */,
 				59AC323C1E08DF290011882F /* ChatController.swift */,
 				59AC323A1E08DF060011882F /* NotificationsController.swift */,
@@ -283,9 +289,11 @@
 			files = (
 				5FAC2C821E08E64000E539BF /* FriendsListController.swift in Sources */,
 				59AC323B1E08DF060011882F /* NotificationsController.swift in Sources */,
+				5FF909471E0EF6C600182BED /* CameraOperations.swift in Sources */,
 				5FD99C5C1DF512CF00D24256 /* ViewController.swift in Sources */,
 				59AC323D1E08DF290011882F /* ChatController.swift in Sources */,
 				59AC32391E08DED10011882F /* SettingsController.swift in Sources */,
+				5FEC42E51E0F710D007CC2F8 /* ImageFilters.swift in Sources */,
 				59DE635C1DFD145800B324E2 /* LogInController.swift in Sources */,
 				5FD99C5A1DF512CF00D24256 /* AppDelegate.swift in Sources */,
 				59AC323F1E08E02F0011882F /* CameraController.swift in Sources */,

@@ -191,7 +191,7 @@
                         <viewControllerLayoutGuide type="top" id="9gz-PP-T6R"/>
                         <viewControllerLayoutGuide type="bottom" id="vv3-Zx-Ewj"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="335-LY-cas">
+                    <view key="view" contentMode="scaleAspectFill" id="335-LY-cas">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -368,7 +368,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="back"/>
                                 <connections>
-                                    <segue destination="V4Q-qI-C97" kind="show" id="Dxn-IB-7jk"/>
+                                    <segue destination="V4Q-qI-C97" kind="show" identifier="FriendsToCamera" id="Dxn-IB-7jk"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -579,7 +579,7 @@
         <image name="dog" width="320" height="240"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Wyt-Jq-x1J"/>
         <segue reference="XPY-qz-m2H"/>
+        <segue reference="Dxn-IB-7jk"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -10,6 +10,11 @@ import UIKit
 
 class FriendsListController: UIViewController {
 
+    var globalImage = CIImage()
+    var blurValue = 0.0
+    var zoomValue = 0.0
+    var brightnessValue = 0.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -19,6 +24,16 @@ class FriendsListController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "FriendsToCamera") {
+            let cameraController = segue.destination as! CameraController
+            cameraController.captureMode = false
+            cameraController.blurValue = blurValue
+            cameraController.zoomValue = zoomValue
+            cameraController.brightnessValue = brightnessValue
+        }
     }
     
 

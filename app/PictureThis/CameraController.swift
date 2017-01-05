@@ -38,19 +38,11 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
     var answerPressed = false
     var sendAction = false
     
-    // brightness stuff
-    var brightnessFilter: CIFilter!
-    var blurFilter: CIFilter!
-    var context = CIContext()
-    var globalImage = CIImage()
+    // zoom factor
+    var maxZoom = 3.0
     
     // stuff to capture images/video and show on the screen
     @IBOutlet weak var imageView: UIImageView!
-    var captureSession : AVCaptureSession?
-    var stillImageOutput : AVCaptureStillImageOutput?
-    var previewLayer : AVCaptureVideoPreviewLayer?
-    
-    
     
     @IBAction func notificationAction(_ sender: Any) {
         animationContract(button: notifications)
@@ -68,9 +60,9 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
                 zoom.setImage(#imageLiteral(resourceName: "Logo"), for: .normal)
                 brightness.setImage(#imageLiteral(resourceName: "Brightness"), for: .normal)
                 if (brightnessActive) {
-                    applyFilters(blur: 0.0, brightness: Float(brightnessValue))
+                    imageView.image = ImageFilters.filters.applyFilters(value: 0.0, mode: 0)
                 } else{
-                    imageView.image = getImageFromCIImage(image: globalImage)
+                    imageView.image = ImageFilters.filters.getImageFromCIImage(image: CameraOperations.camera.getGlobalImage())
                 }
             } else if (zoomPressed) {
                 zoomValue = Double(0.5)
@@ -87,9 +79,9 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
                 blur.setImage(#imageLiteral(resourceName: "Blur"), for: .normal)
                 zoom.setImage(#imageLiteral(resourceName: "Logo"), for: .normal)
                 if (brightnessActive) {
-                    applyFilters(blur: Float(blurValue)*15+1, brightness: 0.0)
+                    self.imageView.image = ImageFilters.filters.applyFilters(value: 0, mode: 1)
                 } else{
-                    imageView.image = getImageFromCIImage(image: globalImage)
+                    imageView.image = ImageFilters.filters.getImageFromCIImage(image: CameraOperations.camera.getGlobalImage())
                 }
             }
             blurPressed = false
@@ -132,24 +124,15 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
         if (blurPressed) {
             blurValue = Double(slider.value)
             if (abs(blurValue - prevBlurValue) > 0.1) {
-                print(blurValue)
                 prevBlurValue = blurValue
-                if (brightnessActive) {
-                    applyFilters(blur: Float(blurValue)*15+1, brightness: Float(brightnessValue))
-                } else {
-                    applyFilters(blur: Float(blurValue)*15+1, brightness: 0.0)
-                }
+                self.imageView.image = ImageFilters.filters.applyFilters(value: Float(blurValue), mode: 0)
             }
         } else if (zoomPressed) {
             zoomValue = Double(slider.value)
-            scrollView.zoomScale = CGFloat((slider.value*5)+1)
+            scrollView.zoomScale = CGFloat(Double(slider.value)*(Double(maxZoom)-1)+1)
         } else {
             brightnessValue = Double(slider.value)
-            if (blurActive) {
-                applyFilters(blur: Float(blurValue)*15+1, brightness: Float(brightnessValue))
-            } else {
-                applyFilters(blur: 0.0, brightness: Float(brightnessValue))
-            }
+            self.imageView.image = ImageFilters.filters.applyFilters(value: Float(brightnessValue), mode: 1)
 
         }
     }
@@ -171,11 +154,7 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
             brightness.setImage(#imageLiteral(resourceName: "Brightness Dark"), for: .normal)
             notifications.isEnabled = true
             notifications.isHidden = false
-            if (brightnessActive) {
-                applyFilters(blur: Float(blurValue)*15+1, brightness: Float(brightnessValue))
-            } else {
-                applyFilters(blur: Float(blurValue)*15+1, brightness: 0.0)
-            }
+            self.imageView.image = ImageFilters.filters.applyFilters(value: Float(blurValue), mode: 0)
         } else {
             slider.isHidden = true
             slider.isEnabled = false
@@ -196,7 +175,7 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
             slider.isHidden = false
             slider.isEnabled = true
             slider.value = Float(zoomValue)
-            scrollView.zoomScale = CGFloat((zoomValue*5)+1)
+            scrollView.zoomScale = CGFloat(zoomValue*(maxZoom-1)+1)
             brightnessPressed = false
             zoomPressed = true
             blurPressed = false
@@ -238,11 +217,7 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
             notifications.setImage(#imageLiteral(resourceName: "Undo"), for: .normal)
             notifications.isEnabled = true
             notifications.isHidden = false
-            if (blurActive) {
-                applyFilters(blur: Float(blurValue)*15+1, brightness: Float(brightnessValue))
-            } else {
-                applyFilters(blur: 0.0, brightness: Float(brightnessValue))
-            }
+            self.imageView.image = ImageFilters.filters.applyFilters(value: Float(brightnessValue), mode: 1)
         } else {
             slider.isHidden = true
             slider.isEnabled = false
@@ -273,7 +248,7 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
             notifications.isEnabled = true
             notifications.isHidden = false
             notifications.setImage(#imageLiteral(resourceName: "Notification"), for: .normal)
-            self.captureSession?.startRunning()
+            CameraOperations.camera.getCameraFeed(imageView: imageView)
             blur.setImage(#imageLiteral(resourceName: "Blur"), for: .normal)
             zoom.setImage(#imageLiteral(resourceName: "Logo"), for: .normal)
             brightness.setImage(#imageLiteral(resourceName: "Brightness"), for: .normal)
@@ -290,7 +265,6 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
             answer.isEnabled = false
             slider.isHidden = true
             slider.isEnabled = false
-            self.previewLayer?.isHidden = false
             enableButton(element: capture)
             captureMode = true
         }
@@ -303,29 +277,12 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
         captureMode = false
         settings.setImage(#imageLiteral(resourceName: "Send"), for: .normal)
         notifications.setImage(#imageLiteral(resourceName: "Undo"), for: .normal)
-        notifications.isEnabled = false
-        notifications.isHidden = true
-        if let videoConnection = stillImageOutput?.connection(withMediaType: AVMediaTypeVideo) {
-            stillImageOutput?.captureStillImageAsynchronously(from: videoConnection) {
-                (imageDataSampleBuffer, error) -> Void in
-                self.captureSession?.stopRunning()
-                self.previewLayer?.isHidden = true
-                let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataSampleBuffer)
-                self.imageView.image = UIImage(data: imageData!)
-                
-                let aUIImage = self.imageView.image
-                let aCGImage = aUIImage?.cgImage
-                self.globalImage = CIImage(cgImage: aCGImage!)
-                
-                self.context = CIContext(options: nil)
-                self.brightnessFilter = CIFilter(name: "CIColorControls")
-                self.blurFilter = CIFilter(name: "CIGaussianBlur")
-            }
-        }
+        CameraOperations.camera.takePhoto(imageView: imageView)
         flash.setImage(#imageLiteral(resourceName: "X"), for: .normal)
         enableButton(element: zoom)
         enableButton(element: brightness)
         enableButton(element: blur)
+        enableButton(element: notifications)
         disableButton(element: capture)
         
         answer.isHidden = false
@@ -338,7 +295,7 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
     
     func unLockZoom() {
         scrollView.bounces = true
-        scrollView.maximumZoomScale = 6.0
+        scrollView.maximumZoomScale = CGFloat(self.maxZoom)
     }
     
     
@@ -367,70 +324,60 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
     
     func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
         if (zoomPressed) {
-            slider.value = Float((scale-1)/5)
-        }
-    }
-    
-    func getImageFromCIImage(image: CIImage) -> UIImage? {
-        let imageRef = context.createCGImage(image, from: image.extent)
-        return UIImage(cgImage: imageRef!)
-        //return = UIImage(ciImage:image, scale:1, orientation:UIImageOrientation(rawValue: 1)!)
-    }
-    
-    func applyFilters(blur: Float, brightness: Float) {
-        var aUIImage: UIImage!
-        var outputImage: CIImage!
-        if (brightness > 0) {
-            brightnessFilter.setValue(globalImage, forKey: "inputImage")
-            brightnessFilter.setValue(brightness, forKey: "inputBrightness");
-            outputImage = brightnessFilter.outputImage!;
-            let tempImage = getImageFromCIImage(image: outputImage)
-            aUIImage = tempImage
-        } else {
-            aUIImage = getImageFromCIImage(image: globalImage)
-        }
-        if (blur > 0) {
-            let aCGImage = aUIImage?.cgImage
-            outputImage = CIImage(cgImage: aCGImage!)
-            blurFilter.setValue(outputImage, forKey: "inputImage")
-            blurFilter.setValue(blur, forKey: "inputRadius");
-            outputImage = blurFilter.outputImage!;
-            let newUIImage = getImageFromCIImage(image: outputImage)
-            imageView.image = newUIImage;
-        } else {
-            imageView.image = aUIImage
+            slider.value = Float((scale-1)/(self.scrollView.maximumZoomScale-1))
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        scrollView.isUserInteractionEnabled = false
+        if (captureMode) {
+            scrollView.isUserInteractionEnabled = false
         
         
-        let aUIImage = self.imageView.image
-        let aCGImage = aUIImage?.cgImage
-        self.globalImage = CIImage(cgImage: aCGImage!)
-        self.context = CIContext(options: nil)
-        self.brightnessFilter = CIFilter(name: "CIColorControls")
-        self.blurFilter = CIFilter(name: "CIBoxBlur")
+            let aUIImage = self.imageView.image
+            let aCGImage = aUIImage?.cgImage
+            CameraOperations.camera.setGlobalImage(image: CIImage(cgImage: aCGImage!))
         
-        self.scrollView.bouncesZoom = true
-        self.scrollView.minimumZoomScale = 1.0;
-        self.scrollView.maximumZoomScale = 6.0
+            self.scrollView.bouncesZoom = true
+            self.scrollView.minimumZoomScale = 1.0;
+            self.scrollView.maximumZoomScale = CGFloat(self.maxZoom)
         
-        slider.isContinuous = true
-        slider.maximumTrackTintColor = UIColor.darkGray
-        
-        disableButton(element: zoom)
-        disableButton(element: brightness)
-        disableButton(element: blur)
-        answer.isHidden = true
-        slider.isHidden = true
-        slider.isEnabled = false
-        self.answer.delegate = self;
-        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(imageTapped(img:)))
-        imageView.isUserInteractionEnabled = true
-        imageView.addGestureRecognizer(tapGestureRecognizer)
+            slider.isContinuous = true
+            slider.maximumTrackTintColor = UIColor.darkGray
+            
+            disableButton(element: zoom)
+            disableButton(element: brightness)
+            disableButton(element: blur)
+            answer.isHidden = true
+            slider.isHidden = true
+            slider.isEnabled = false
+            self.answer.delegate = self;
+            let tapGestureRecognizer = UITapGestureRecognizer(target:self,  action:#selector(imageTapped(img:)))
+            imageView.isUserInteractionEnabled = true
+            imageView.addGestureRecognizer(tapGestureRecognizer)
+        } else {
+            print("FUCK")
+            self.scrollView.zoomScale = CGFloat(Double(self.zoomValue)*(Double(maxZoom)-1)+1)
+            disableButton(element: notifications)
+            slider.isHidden = true
+            slider.isEnabled = false
+            settings.setImage(#imageLiteral(resourceName: "Send"), for: .normal)
+            notifications.setImage(#imageLiteral(resourceName: "Undo"), for: .normal)
+            captureMode = false
+            flash.setImage(#imageLiteral(resourceName: "X"), for: .normal)
+            disableButton(element: capture)
+        }
+
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "FriendsList") {
+            let friendsListController = segue.destination as! FriendsListController
+            friendsListController.globalImage = CameraOperations.camera.getGlobalImage()
+            friendsListController.blurValue = blurValue
+            friendsListController.zoomValue = zoomValue
+            friendsListController.brightnessValue = brightnessValue
+        }
     }
     
     func imageTapped(img: AnyObject)
@@ -451,49 +398,17 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        previewLayer?.frame = self.view.layer.bounds
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        imageView.frame = self.view.layer.bounds
         
-        captureSession = AVCaptureSession()
-        captureSession?.sessionPreset = AVCaptureSessionPresetPhoto //AVCaptureSessionPreset1920x1080
-        
-        let backCamera = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
-        
-        var error : NSError?
-        var input: AVCaptureDeviceInput!
-        do {
-            input = try AVCaptureDeviceInput(device: backCamera)
-        } catch let error1 as NSError {
-            error = error1
-            input = nil
+        if (captureMode) {
+            CameraOperations.camera.getCameraFeed(imageView: imageView)
+        } else {
+            self.imageView.image = ImageFilters.filters.getFinalImage()
         }
-        
-        if (error == nil && captureSession?.canAddInput(input) != nil){
-            
-            captureSession?.addInput(input)
-            
-            stillImageOutput = AVCaptureStillImageOutput()
-            stillImageOutput?.outputSettings = [AVVideoCodecKey : AVVideoCodecJPEG]
-            
-            if (captureSession?.canAddOutput(stillImageOutput) != nil){
-                captureSession?.addOutput(stillImageOutput)
-                
-                previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-                previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
-                previewLayer?.connection.videoOrientation = AVCaptureVideoOrientation.portrait
-
-                imageView.layer.addSublayer(previewLayer!)
-                captureSession?.startRunning()
-                
-            }
-            
-            
-        }
-        
-        
     }
     
     func disableButton(element: UIButton) {
