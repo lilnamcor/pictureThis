@@ -195,10 +195,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2XP-7J-ZVo">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2XP-7J-ZVo">
+                                <rect key="frame" x="0.0" y="-1" width="375" height="668"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dog" translatesAutoresizingMaskIntoConstraints="NO" id="ydq-aO-9xF">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ydq-aO-9xF">
                                         <rect key="frame" x="0.0" y="-1" width="375" height="669"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
@@ -208,7 +208,7 @@
                                 </connections>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EOT-K6-jGJ">
-                                <rect key="frame" x="16" y="577" width="71" height="70"/>
+                                <rect key="frame" x="16" y="605" width="42" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Notification">
                                     <color key="titleShadowColor" red="0.97888918820000004" green="0.98842437439999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -220,42 +220,21 @@
                                     <action selector="notificationExpandAction:" destination="V4Q-qI-C97" eventType="touchDown" id="unA-yY-hyW"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jvb-RZ-9Cl">
-                                <rect key="frame" x="288" y="576" width="71" height="71"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X7J-0i-0k2">
+                                <rect key="frame" x="331" y="90" width="28" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Settings">
+                                <state key="normal" image="Brightness">
                                     <color key="titleShadowColor" red="0.97888918820000004" green="0.98842437439999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="sendAction:" destination="V4Q-qI-C97" eventType="touchUpInside" id="WQB-Pk-aXM"/>
-                                    <action selector="sendDragEnterAction:" destination="V4Q-qI-C97" eventType="touchDragEnter" id="lUX-8k-2hc"/>
-                                    <action selector="sendDragExitAction:" destination="V4Q-qI-C97" eventType="touchDragExit" id="GIm-2j-NeG"/>
-                                    <action selector="sendExpandAction:" destination="V4Q-qI-C97" eventType="touchDown" id="8Oa-FO-C8m"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oHW-v2-VOf">
-                                <rect key="frame" x="126" y="493" width="123" height="123"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" backgroundImage="Capture"/>
-                                <connections>
-                                    <action selector="captureAction:" destination="V4Q-qI-C97" eventType="touchUpInside" id="K4Z-E7-nbM"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z4p-nn-tzF">
-                                <rect key="frame" x="308" y="20" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Blur">
-                                    <color key="titleShadowColor" red="0.97888918820000004" green="0.98842437439999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="blurAction:" destination="V4Q-qI-C97" eventType="touchUpInside" id="ffa-Xe-vno"/>
-                                    <action selector="blurDragEnterAction:" destination="V4Q-qI-C97" eventType="touchDragEnter" id="rDs-je-4If"/>
-                                    <action selector="blurDragExitAction:" destination="V4Q-qI-C97" eventType="touchDragExit" id="dIB-Ec-UBn"/>
-                                    <action selector="blurExpandAction:" destination="V4Q-qI-C97" eventType="touchDown" id="Jea-XC-swP"/>
+                                    <action selector="brightnessAction:" destination="V4Q-qI-C97" eventType="touchUpInside" id="Zlm-5n-DbY"/>
+                                    <action selector="brightnessDragEnterAction:" destination="V4Q-qI-C97" eventType="touchDragEnter" id="LPd-Qq-0P4"/>
+                                    <action selector="brightnessDragExitAction:" destination="V4Q-qI-C97" eventType="touchDragExit" id="0cB-js-ZMd"/>
+                                    <action selector="brightnessExpandAction:" destination="V4Q-qI-C97" eventType="touchDown" id="fqo-6y-cfx"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2MA-IL-sIK">
-                                <rect key="frame" x="308" y="75" width="51" height="51"/>
+                                <rect key="frame" x="333" y="56" width="26" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Logo">
                                     <color key="titleShadowColor" red="0.97888918820000004" green="0.98842437439999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -267,17 +246,30 @@
                                     <action selector="zoomExpandAction:" destination="V4Q-qI-C97" eventType="touchDown" id="tfp-Fg-Yxs"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X7J-0i-0k2">
-                                <rect key="frame" x="308" y="134" width="49" height="48"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NxX-9B-W68">
+                                <rect key="frame" x="16" y="28" width="27" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Brightness">
+                                <state key="normal" image="Flash">
                                     <color key="titleShadowColor" red="0.97888918820000004" green="0.98842437439999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="brightnessAction:" destination="V4Q-qI-C97" eventType="touchUpInside" id="Zlm-5n-DbY"/>
-                                    <action selector="brightnessDragEnterAction:" destination="V4Q-qI-C97" eventType="touchDragEnter" id="LPd-Qq-0P4"/>
-                                    <action selector="brightnessDragExitAction:" destination="V4Q-qI-C97" eventType="touchDragExit" id="0cB-js-ZMd"/>
-                                    <action selector="brightnessExpandAction:" destination="V4Q-qI-C97" eventType="touchDown" id="fqo-6y-cfx"/>
+                                    <action selector="flashAction:" destination="V4Q-qI-C97" eventType="touchUpInside" id="yGF-ON-bXz"/>
+                                    <action selector="flashDragEnterAction:" destination="V4Q-qI-C97" eventType="touchDragEnter" id="md3-KH-FM3"/>
+                                    <action selector="flashDragExitAction:" destination="V4Q-qI-C97" eventType="touchDragExit" id="xMJ-jA-Fri"/>
+                                    <action selector="flashExpandAction:" destination="V4Q-qI-C97" eventType="touchDown" id="WRL-0M-MGG"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jvb-RZ-9Cl">
+                                <rect key="frame" x="314" y="602" width="45" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Settings">
+                                    <color key="titleShadowColor" red="0.97888918820000004" green="0.98842437439999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="sendAction:" destination="V4Q-qI-C97" eventType="touchUpInside" id="WQB-Pk-aXM"/>
+                                    <action selector="sendDragEnterAction:" destination="V4Q-qI-C97" eventType="touchDragEnter" id="lUX-8k-2hc"/>
+                                    <action selector="sendDragExitAction:" destination="V4Q-qI-C97" eventType="touchDragExit" id="GIm-2j-NeG"/>
+                                    <action selector="sendExpandAction:" destination="V4Q-qI-C97" eventType="touchDown" id="8Oa-FO-C8m"/>
                                 </connections>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="KUh-rJ-ZEy">
@@ -298,17 +290,25 @@
                                     <action selector="answerAction:" destination="V4Q-qI-C97" eventType="editingDidBegin" id="ho2-sG-Os5"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NxX-9B-W68">
-                                <rect key="frame" x="16" y="28" width="65" height="64"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oHW-v2-VOf">
+                                <rect key="frame" x="150" y="572" width="74" height="74"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Flash">
+                                <state key="normal" backgroundImage="Capture"/>
+                                <connections>
+                                    <action selector="captureAction:" destination="V4Q-qI-C97" eventType="touchUpInside" id="K4Z-E7-nbM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z4p-nn-tzF">
+                                <rect key="frame" x="329" y="20" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Blur">
                                     <color key="titleShadowColor" red="0.97888918820000004" green="0.98842437439999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="flashAction:" destination="V4Q-qI-C97" eventType="touchUpInside" id="yGF-ON-bXz"/>
-                                    <action selector="flashDragEnterAction:" destination="V4Q-qI-C97" eventType="touchDragEnter" id="md3-KH-FM3"/>
-                                    <action selector="flashDragExitAction:" destination="V4Q-qI-C97" eventType="touchDragExit" id="xMJ-jA-Fri"/>
-                                    <action selector="flashExpandAction:" destination="V4Q-qI-C97" eventType="touchDown" id="WRL-0M-MGG"/>
+                                    <action selector="blurAction:" destination="V4Q-qI-C97" eventType="touchUpInside" id="ffa-Xe-vno"/>
+                                    <action selector="blurDragEnterAction:" destination="V4Q-qI-C97" eventType="touchDragEnter" id="rDs-je-4If"/>
+                                    <action selector="blurDragExitAction:" destination="V4Q-qI-C97" eventType="touchDragExit" id="dIB-Ec-UBn"/>
+                                    <action selector="blurExpandAction:" destination="V4Q-qI-C97" eventType="touchDown" id="Jea-XC-swP"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -576,10 +576,9 @@
         <image name="Logo" width="93" height="93"/>
         <image name="Notification" width="94" height="93"/>
         <image name="Settings" width="93" height="93"/>
-        <image name="dog" width="320" height="240"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="4jR-38-M5X"/>
         <segue reference="XPY-qz-m2H"/>
-        <segue reference="Dxn-IB-7jk"/>
     </inferredMetricsTieBreakers>
 </document>

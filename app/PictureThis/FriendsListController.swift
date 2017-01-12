@@ -14,6 +14,7 @@ class FriendsListController: UIViewController {
     var blurValue = 0.0
     var zoomValue = 0.0
     var brightnessValue = 0.0
+    var answer = NSString()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,7 @@ class FriendsListController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "FriendsToCamera") {
             let cameraController = segue.destination as! CameraController
+            cameraController.answerText = answer
             cameraController.captureMode = false
             cameraController.blurValue = blurValue
             cameraController.zoomValue = zoomValue

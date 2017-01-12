@@ -50,43 +50,38 @@ final class CameraOperations: NSObject {
     }
     
     func getCameraFeed(imageView: UIImageView) {
-        if (started) {
-            captureSession?.startRunning()
-            previewLayer?.isHidden = false
-        } else {
-            captureSession = AVCaptureSession()
-            captureSession?.sessionPreset = AVCaptureSessionPresetPhoto //AVCaptureSessionPreset1920x1080
+        captureSession = AVCaptureSession()
+        captureSession?.sessionPreset = AVCaptureSessionPresetPhoto //AVCaptureSessionPreset1920x1080
         
-            let backCamera = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        let backCamera = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         
-            var error : NSError?
-            var input: AVCaptureDeviceInput!
-            do {
-                input = try AVCaptureDeviceInput(device: backCamera)
-            } catch let error1 as NSError {
-                error = error1
-                input = nil
-            }
+        var error : NSError?
+        var input: AVCaptureDeviceInput!
+        do {
+            input = try AVCaptureDeviceInput(device: backCamera)
+        } catch let error1 as NSError {
+            error = error1
+            input = nil
+        }
         
-            if (error == nil && captureSession?.canAddInput(input) != nil){
+        if (error == nil && captureSession?.canAddInput(input) != nil){
+        
+            captureSession?.addInput(input)
             
-                captureSession?.addInput(input)
+            stillImageOutput = AVCaptureStillImageOutput()
+            stillImageOutput?.outputSettings = [AVVideoCodecKey : AVVideoCodecJPEG]
             
-                stillImageOutput = AVCaptureStillImageOutput()
-                stillImageOutput?.outputSettings = [AVVideoCodecKey : AVVideoCodecJPEG]
-            
-                if (captureSession?.canAddOutput(stillImageOutput) != nil){
-                    captureSession?.addOutput(stillImageOutput)
+            if (captureSession?.canAddOutput(stillImageOutput) != nil){
+                captureSession?.addOutput(stillImageOutput)
                 
-                    previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-                    previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
-                    previewLayer?.connection.videoOrientation = AVCaptureVideoOrientation.portrait
+                previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+                previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
+                previewLayer?.connection.videoOrientation = AVCaptureVideoOrientation.portrait
                 
-                    imageView.layer.addSublayer(previewLayer!)
-                    captureSession?.startRunning()
-                    previewLayer?.frame = imageView.frame
-                    started = true
-                }
+                imageView.layer.addSublayer(previewLayer!)
+                captureSession?.startRunning()
+                previewLayer?.frame = imageView.frame
+                started = true
             }
         }
     }

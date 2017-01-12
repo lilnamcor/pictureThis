@@ -31,12 +31,14 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
     var blurActive = false
     var zoomPressed = false
     var zoomValue = 0.5
+    var answerText = NSString()
     var zoomActive = false
     var brightnessPressed = false
     var brightnessValue = 0.5
     var brightnessActive = false
     var answerPressed = false
     var sendAction = false
+    
     
     // zoom factor
     var maxZoom = 3.0
@@ -256,6 +258,9 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
             blurActive = false
             disableButton(element: zoom)
             disableButton(element: brightness)
+            blurValue = 0.5
+            zoomValue = 0.5
+            brightnessValue = 0.5
             brightnessActive = false
             blurPressed = false
             zoomPressed = false
@@ -263,6 +268,7 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
             answerPressed = false
             answer.isHidden = true
             answer.isEnabled = false
+            answer.text = "_ _ _ _"
             slider.isHidden = true
             slider.isEnabled = false
             enableButton(element: capture)
@@ -282,10 +288,10 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
         enableButton(element: zoom)
         enableButton(element: brightness)
         enableButton(element: blur)
-        enableButton(element: notifications)
+        disableButton(element: notifications)
         disableButton(element: capture)
-        
         answer.isHidden = false
+        answer.isEnabled = true
     }
     
     func lockZoom() {
@@ -318,6 +324,7 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
         return imageView
     }
     
+    // this gets rid of momentum
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
         scrollView.setContentOffset(scrollView.contentOffset, animated: true)
     }
@@ -333,11 +340,11 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
         if (captureMode) {
             scrollView.isUserInteractionEnabled = false
         
-        
+            /*
             let aUIImage = self.imageView.image
             let aCGImage = aUIImage?.cgImage
             CameraOperations.camera.setGlobalImage(image: CIImage(cgImage: aCGImage!))
-        
+            */
             self.scrollView.bouncesZoom = true
             self.scrollView.minimumZoomScale = 1.0;
             self.scrollView.maximumZoomScale = CGFloat(self.maxZoom)
@@ -351,13 +358,13 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
             answer.isHidden = true
             slider.isHidden = true
             slider.isEnabled = false
-            self.answer.delegate = self;
+            self.answer.delegate = self
             let tapGestureRecognizer = UITapGestureRecognizer(target:self,  action:#selector(imageTapped(img:)))
             imageView.isUserInteractionEnabled = true
             imageView.addGestureRecognizer(tapGestureRecognizer)
         } else {
-            print("FUCK")
-            self.scrollView.zoomScale = CGFloat(Double(self.zoomValue)*(Double(maxZoom)-1)+1)
+            answerPressed = true
+            answer.text = answerText as String
             disableButton(element: notifications)
             slider.isHidden = true
             slider.isEnabled = false
@@ -377,6 +384,7 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
             friendsListController.blurValue = blurValue
             friendsListController.zoomValue = zoomValue
             friendsListController.brightnessValue = brightnessValue
+            friendsListController.answer = answer.text! as NSString
         }
     }
     
