@@ -94,6 +94,7 @@ final class CameraOperations: NSObject {
                 self.previewLayer?.isHidden = true
                 let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataSampleBuffer)
                 imageView.image = UIImage(data: imageData!)
+                ImageFilters.filters.setFinalImage(image: imageView.image!)
                 
                 self.setGlobalImage(image: CIImage(cgImage: (imageView.image?.cgImage!)!))
             }
