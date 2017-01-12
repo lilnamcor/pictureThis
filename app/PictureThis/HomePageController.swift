@@ -12,13 +12,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var logo: UIImageView!
     @IBOutlet weak var signUp: UIButton!
     @IBOutlet weak var login: UIButton!
+    @IBOutlet weak var background: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        login.layer.borderWidth = 0.8
-        login.layer.borderColor = UIColor.gray.cgColor
-        signUp.layer.borderWidth = 0.8
-        signUp.layer.borderColor = UIColor.gray.cgColor
         logo.image = #imageLiteral(resourceName: "dog")
         // Do any additional setup after loading the view, typically from a nib.
     }
