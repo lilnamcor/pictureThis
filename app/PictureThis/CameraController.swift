@@ -85,6 +85,7 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
                 } else{
                     imageView.image = ImageFilters.filters.getImageFromCIImage(image: CameraOperations.camera.getGlobalImage())
                 }
+                ImageFilters.filters.setFinalImage(image: imageView.image!)
             }
             blurPressed = false
             zoomPressed = false
@@ -310,6 +311,7 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         if (sendAction) {
+            sendAction = false
             self.performSegue(withIdentifier: "FriendsList", sender:self)
         } else {
             if (answer.text == "") {

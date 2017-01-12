@@ -21,6 +21,10 @@ final class ImageFilters: NSObject {
         return self.finalImage
     }
     
+    func setFinalImage(image: UIImage) {
+        self.finalImage = image
+    }
+    
     func getImageFromCIImage(image: CIImage) -> UIImage? {
         return UIImage(ciImage:image, scale:1, orientation:UIImageOrientation(rawValue: 0)!)
     }
