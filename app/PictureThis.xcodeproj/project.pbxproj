@@ -16,7 +16,7 @@
 		5FAC2C821E08E64000E539BF /* FriendsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAC2C811E08E64000E539BF /* FriendsListController.swift */; };
 		5FC63A251E0C71F1004423BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FC63A231E0C71F1004423BE /* Main.storyboard */; };
 		5FD99C5A1DF512CF00D24256 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD99C591DF512CF00D24256 /* AppDelegate.swift */; };
-		5FD99C5C1DF512CF00D24256 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD99C5B1DF512CF00D24256 /* ViewController.swift */; };
+		5FD99C5C1DF512CF00D24256 /* HomePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD99C5B1DF512CF00D24256 /* HomePageController.swift */; };
 		5FD99C611DF512CF00D24256 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FD99C601DF512CF00D24256 /* Assets.xcassets */; };
 		5FD99C641DF512CF00D24256 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FD99C621DF512CF00D24256 /* LaunchScreen.storyboard */; };
 		5FD99C6F1DF512CF00D24256 /* PictureThisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD99C6E1DF512CF00D24256 /* PictureThisTests.swift */; };
@@ -53,7 +53,7 @@
 		5FC63A241E0C71F1004423BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5FD99C561DF512CF00D24256 /* PictureThis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PictureThis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FD99C591DF512CF00D24256 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5FD99C5B1DF512CF00D24256 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5FD99C5B1DF512CF00D24256 /* HomePageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
 		5FD99C601DF512CF00D24256 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5FD99C631DF512CF00D24256 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5FD99C651DF512CF00D24256 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -116,7 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				5FD99C591DF512CF00D24256 /* AppDelegate.swift */,
-				5FD99C5B1DF512CF00D24256 /* ViewController.swift */,
+				5FD99C5B1DF512CF00D24256 /* HomePageController.swift */,
 				59DE635B1DFD145800B324E2 /* LogInController.swift */,
 				5FAC2C811E08E64000E539BF /* FriendsListController.swift */,
 				59AC323E1E08E02F0011882F /* CameraController.swift */,
@@ -290,7 +290,7 @@
 				5FAC2C821E08E64000E539BF /* FriendsListController.swift in Sources */,
 				59AC323B1E08DF060011882F /* NotificationsController.swift in Sources */,
 				5FF909471E0EF6C600182BED /* CameraOperations.swift in Sources */,
-				5FD99C5C1DF512CF00D24256 /* ViewController.swift in Sources */,
+				5FD99C5C1DF512CF00D24256 /* HomePageController.swift in Sources */,
 				59AC323D1E08DF290011882F /* ChatController.swift in Sources */,
 				59AC32391E08DED10011882F /* SettingsController.swift in Sources */,
 				5FEC42E51E0F710D007CC2F8 /* ImageFilters.swift in Sources */,
