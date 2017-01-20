@@ -15,6 +15,8 @@ class FriendsListController: UIViewController {
     var zoomValue = 0.0
     var brightnessValue = 0.0
     var answer = NSString()
+    var xOffset = CGFloat()
+    var yOffset = CGFloat()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,9 +34,23 @@ class FriendsListController: UIViewController {
             let cameraController = segue.destination as! CameraController
             cameraController.answerText = answer
             cameraController.captureMode = false
-            cameraController.blurValue = blurValue
-            cameraController.zoomValue = zoomValue
-            cameraController.brightnessValue = brightnessValue
+            if (blurValue > 0.0) {
+                cameraController.blurValue = blurValue
+                cameraController.blurActive = true
+            } else {
+                cameraController.blurValue = 0.0
+            }
+            if (zoomValue > 0.0) {
+                cameraController.zoomActive = true
+                cameraController.xOffset = xOffset
+                cameraController.yOffset = yOffset
+            }
+            if (brightnessValue > 0.0) {
+                cameraController.brightnessValue = brightnessValue
+                cameraController.brightnessActive = true
+            } else {
+                cameraController.brightnessValue = 0.0
+            }
         }
     }
     

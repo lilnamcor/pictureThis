@@ -12,40 +12,50 @@ final class ImageFilters: NSObject {
     
     static let filters = ImageFilters()
     
-    var finalImage: UIImage!
+    var blurImage: CIImage!
     var brightnessFilter: CIFilter!
     var blurFilter: CIFilter!
     var context = CIContext()
+    var prevBlur = 0.0
     
-    func getFinalImage() -> UIImage {
-        return self.finalImage
-    }
-    
-    func setFinalImage(image: UIImage) {
-        self.finalImage = image
-    }
-    
-    func getImageFromCIImage(image: CIImage) -> UIImage? {
-        return UIImage(ciImage:image, scale:1, orientation:UIImageOrientation(rawValue: 0)!)
-    }
-    
-    func applyFilters(value: Float, mode: Int) -> UIImage {
+    override init() {
         self.context = CIContext(options: nil)
         self.brightnessFilter = CIFilter(name: "CIColorControls")
         self.blurFilter = CIFilter(name: "CIGaussianBlur")
-        if (mode == 0) {
-            let temp = value * 5 + 1
-            self.blurFilter.setValue(CameraOperations.camera.getBrightnessImage(), forKey: "inputImage")
-            self.blurFilter.setValue(temp, forKey: "inputRadius")
-            CameraOperations.camera.setBlurImage(image: self.blurFilter.outputImage!)
-            self.finalImage = getImageFromCIImage(image: CameraOperations.camera.getBlurImage())!
-        } else {
-            self.brightnessFilter.setValue(CameraOperations.camera.getBlurImage(), forKey: "inputImage")
-            self.brightnessFilter.setValue(value/2.0, forKey: "inputBrightness")
-            CameraOperations.camera.setBrightnessImage(image: self.brightnessFilter.outputImage!)
-            self.finalImage = getImageFromCIImage(image: CameraOperations.camera.getBrightnessImage())!
+    }
+    
+    func getBlurImage() -> CIImage {
+        return self.blurImage
+    }
+    
+    func setBlurImage(image: CIImage) {
+        self.blurImage = image
+    }
+    
+    func getImageFromCIImage(image: CIImage) -> UIImage? {
+        return UIImage(ciImage: image)
+        //return UIImage(ciImage:image, scale:1, orientation:UIImageOrientation(rawValue: 0)!)
+    }
+    
+    func applyFilters(blurValue: Double, brightnessValue: Double) -> UIImage {
+        if (blurValue == 0 && brightnessValue == 0) {
+            return self.getImageFromCIImage(image: CameraOperations.camera.getGlobalImage())!
         }
-        return self.finalImage
+        var toReturn = CIImage()
+        if (blurValue != prevBlur) {
+            let temp = blurValue * 5 + 1
+            self.blurFilter.setValue(CameraOperations.camera.getGlobalImage(), forKey: "inputImage")
+            self.blurFilter.setValue(temp, forKey: "inputRadius")
+            self.setBlurImage(image: self.blurFilter.outputImage!)
+            toReturn = self.getBlurImage()
+        }
+        if (brightnessValue > 0) {
+            self.brightnessFilter.setValue(self.getBlurImage(), forKey: "inputImage")
+            self.brightnessFilter.setValue(brightnessValue/2.0, forKey: "inputBrightness")
+            toReturn = self.brightnessFilter.outputImage!
+        }
+        prevBlur = blurValue
+        return self.getImageFromCIImage(image: toReturn)!
     }
 
 }

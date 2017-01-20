@@ -18,26 +18,8 @@ final class CameraOperations: NSObject {
     var stillImageOutput : AVCaptureStillImageOutput?
     var previewLayer : AVCaptureVideoPreviewLayer?
     var globalImage = CIImage()
-    var blurImage = CIImage()
-    var brightnessImage = CIImage()
     
     var started = false
-    
-    func getBlurImage() -> CIImage {
-        return self.blurImage
-    }
-    
-    func setBlurImage(image: CIImage) {
-        self.blurImage = image
-    }
-    
-    func getBrightnessImage() -> CIImage {
-        return self.brightnessImage
-    }
-    
-    func setBrightnessImage(image: CIImage) {
-        self.brightnessImage = image
-    }
     
     func getGlobalImage() -> CIImage {
         return self.globalImage
@@ -45,8 +27,6 @@ final class CameraOperations: NSObject {
     
     func setGlobalImage(image: CIImage) {
         self.globalImage = image
-        self.blurImage = image.copy() as! CIImage
-        self.brightnessImage = image.copy() as! CIImage
     }
     
     func getCameraFeed(imageView: UIImageView) {
@@ -94,7 +74,7 @@ final class CameraOperations: NSObject {
                 self.previewLayer?.isHidden = true
                 let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataSampleBuffer)
                 imageView.image = UIImage(data: imageData!)
-                ImageFilters.filters.setFinalImage(image: imageView.image!)
+                ImageFilters.filters.setBlurImage(image: CIImage(data: imageData!)!)
                 
                 self.setGlobalImage(image: CIImage(cgImage: (imageView.image?.cgImage!)!))
             }
