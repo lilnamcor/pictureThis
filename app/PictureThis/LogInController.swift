@@ -11,13 +11,22 @@ import UIKit
 class LogInController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var Username: UITextField!
     @IBOutlet weak var Password: UITextField!
+    @IBOutlet weak var signUp: UIButton!
+    @IBOutlet weak var logIn: UIButton!
+    @IBOutlet weak var logInFacebook: UIButton!
     var usernameBool: Bool = false
     var passwordBool: Bool = false
-
-
+    
+    @IBOutlet weak var logo: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        signUp.layer.cornerRadius = 5
+        signUp.layer.borderWidth = 1
+        signUp.layer.borderColor = UIColor(colorLiteralRed: 0/255, green: 44/255, blue: 125/255, alpha: 1.0).cgColor
+        logIn.layer.cornerRadius = 5
         Username.delegate = self
+        logo.image = #imageLiteral(resourceName: "picturethis")
         // Do any additional setup after loading the view.
     }
 
