@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22C168E01E308CDC009941E4 /* ReceivePictureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C168DF1E308CDC009941E4 /* ReceivePictureController.swift */; };
 		59AC32391E08DED10011882F /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AC32381E08DED10011882F /* SettingsController.swift */; };
 		59AC323B1E08DF060011882F /* NotificationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AC323A1E08DF060011882F /* NotificationsController.swift */; };
 		59AC323D1E08DF290011882F /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AC323C1E08DF290011882F /* ChatController.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		22C168DF1E308CDC009941E4 /* ReceivePictureController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceivePictureController.swift; sourceTree = "<group>"; };
 		59AC32381E08DED10011882F /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		59AC323A1E08DF060011882F /* NotificationsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsController.swift; sourceTree = "<group>"; };
 		59AC323C1E08DF290011882F /* ChatController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				5FD99C601DF512CF00D24256 /* Assets.xcassets */,
 				5FD99C621DF512CF00D24256 /* LaunchScreen.storyboard */,
 				5FD99C651DF512CF00D24256 /* Info.plist */,
+				22C168DF1E308CDC009941E4 /* ReceivePictureController.swift */,
 			);
 			path = PictureThis;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22C168E01E308CDC009941E4 /* ReceivePictureController.swift in Sources */,
 				5FAC2C821E08E64000E539BF /* FriendsListController.swift in Sources */,
 				59AC323B1E08DF060011882F /* NotificationsController.swift in Sources */,
 				5FF909471E0EF6C600182BED /* CameraOperations.swift in Sources */,
