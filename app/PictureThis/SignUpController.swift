@@ -14,6 +14,8 @@ class SignUpController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var lastName: UITextField!
     @IBOutlet weak var birthDate: UITextField!
     @IBOutlet weak var sexField: UISegmentedControl!
+    @IBOutlet weak var privacyPolicy: UILabel!
+    @IBOutlet weak var signUp: UIButton!
     var firstNameBool: Bool = false
     var lastNameBool: Bool = false
     var birthDateBool: Bool = false
@@ -23,6 +25,10 @@ class SignUpController: UIViewController, UITextFieldDelegate {
         firstName.delegate = self
         lastName.delegate = self
         birthDate.delegate = self
+        signUp.layer.cornerRadius = 5
+        privacyPolicy.sizeToFit()
+        privacyPolicy.adjustsFontSizeToFitWidth = true
+        privacyPolicy.textAlignment = .center
         // Do any additional setup after loading the view.
     }
     
