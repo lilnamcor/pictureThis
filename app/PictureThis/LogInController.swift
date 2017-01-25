@@ -9,14 +9,16 @@
 import UIKit
 
 class LogInController: UIViewController, UITextFieldDelegate {
-    @IBOutlet weak var Username: UITextField!
-    @IBOutlet weak var Password: UITextField!
+    @IBOutlet weak var username: UITextField!
+    @IBOutlet weak var password: UITextField!
     @IBOutlet weak var signUp: UIButton!
     @IBOutlet weak var logIn: UIButton!
     @IBOutlet weak var logInFacebook: UIButton!
     var usernameBool: Bool = false
     var passwordBool: Bool = false
-    
+    var usernameActive: Bool = false
+    var passwordActive: Bool = false
+ 
     @IBOutlet weak var logo: UIImageView!
     
     override func viewDidLoad() {
@@ -25,29 +27,51 @@ class LogInController: UIViewController, UITextFieldDelegate {
         signUp.layer.borderWidth = 1
         signUp.layer.borderColor = UIColor(colorLiteralRed: 0/255, green: 44/255, blue: 125/255, alpha: 1.0).cgColor
         logIn.layer.cornerRadius = 5
-        Username.delegate = self
+        username.delegate = self
         logo.image = #imageLiteral(resourceName: "picturethis")
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self,  action:#selector(minimizeKeyboard(_:)))
+        self.view.isUserInteractionEnabled = true
+        self.view.addGestureRecognizer(tapGestureRecognizer)
         // Do any additional setup after loading the view.
     }
 
+    func minimizeKeyboard(_ sender: UITapGestureRecognizer) {
+        if (usernameActive) {
+            usernameActive = false
+            username.resignFirstResponder()
+        }
+        else if (passwordActive) {
+            passwordActive = false
+            password.resignFirstResponder()
+        }
+    }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
-        self.Password.becomeFirstResponder()
-        Password.text = ""
+        if (passwordBool && password.text != "") {
+            // login function
+            print("HELLO")
+        } else {
+            password.text = ""
+            passwordActive = true
+            passwordBool = true
+            self.password.becomeFirstResponder()
+        }
         return true
     }
     
     @IBAction func eraseUsername(_ sender: Any) {
         if (usernameBool == false) {
-            Username.text = ""
+            username.text = ""
         }
         usernameBool = true
+        usernameActive = true
     }
 
     @IBAction func erasePassword(_ sender: Any) {
-        if (passwordBool == false) {
-            Password.text = ""
-        }
+        password.text = ""
         passwordBool = true
+        passwordActive = true
     }
     
     override func didReceiveMemoryWarning() {

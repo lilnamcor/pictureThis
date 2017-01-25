@@ -18,6 +18,8 @@ class SignUpController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var signUp: UIButton!
     var firstNameBool: Bool = false
     var lastNameBool: Bool = false
+    var firstNameActive: Bool = false
+    var lastNameActive: Bool = false
     var birthDateBool: Bool = false
     
     override func viewDidLoad() {
@@ -26,10 +28,25 @@ class SignUpController: UIViewController, UITextFieldDelegate {
         lastName.delegate = self
         birthDate.delegate = self
         signUp.layer.cornerRadius = 5
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self,  action:#selector(minimizeKeyboard(_:)))
+        self.view.isUserInteractionEnabled = true
+        self.view.addGestureRecognizer(tapGestureRecognizer)
+    
         privacyPolicy.sizeToFit()
         privacyPolicy.adjustsFontSizeToFitWidth = true
         privacyPolicy.textAlignment = .center
         // Do any additional setup after loading the view.
+    }
+    
+    func minimizeKeyboard(_ sender: UITapGestureRecognizer) {
+        if (firstNameActive) {
+            firstNameActive = false
+            firstName.resignFirstResponder()
+        }
+        else if (lastNameActive) {
+            lastNameActive = false
+            lastName.resignFirstResponder()
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
@@ -55,10 +72,12 @@ class SignUpController: UIViewController, UITextFieldDelegate {
         }
         birthDateBool = true
     }
+    
     @IBAction func eraseFirst(_ sender: Any) {
         if (firstNameBool == false) {
             firstName.text = ""
         }
+        firstNameActive = true
         firstNameBool = true
     }
     
@@ -66,6 +85,7 @@ class SignUpController: UIViewController, UITextFieldDelegate {
         if (lastNameBool == false) {
             lastName.text = ""
         }
+        lastNameActive = true
         lastNameBool = true
     }
     
