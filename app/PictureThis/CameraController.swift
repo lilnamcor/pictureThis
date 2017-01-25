@@ -42,7 +42,7 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
     var yOffset = CGFloat()
     
     // zoom factor
-    var MAXZOOM = 3.0
+    var MAXZOOM = 6.0
     
     // stuff to capture images/video and show on the screen
     @IBOutlet weak var imageView: UIImageView!
@@ -451,11 +451,6 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
         super.viewDidAppear(animated)
     }
     
-    func getImageFromCIImage(image: UIImage) -> UIImage? {
-        //return UIImage(ciImage: image)
-        
-        return UIImage(ciImage:CIImage(image:image)!, scale:1, orientation:UIImageOrientation(rawValue: 0)!)
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -463,8 +458,7 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
         if (captureMode) {
             CameraOperations.camera.getCameraFeed(imageView: imageView)
         } else {
-            imageView.image = getImageFromCIImage(image: ImageFilters.filters.applyFilters(blurValue: self.blurValue, brightnessValue: self.brightnessValue))
-            //print(imageView.image?.imageOrientation.rawValue)
+            imageView.image = ImageFilters.filters.applyFilters(blurValue: self.blurValue, brightnessValue: self.brightnessValue)
         }
     }
     
