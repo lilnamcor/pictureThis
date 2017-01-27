@@ -28,6 +28,7 @@ class LogInController: UIViewController, UITextFieldDelegate {
         signUp.layer.borderColor = UIColor(colorLiteralRed: 0/255, green: 44/255, blue: 125/255, alpha: 1.0).cgColor
         logIn.layer.cornerRadius = 5
         username.delegate = self
+        password.delegate = self
         logo.image = #imageLiteral(resourceName: "picturethis")
         
         let tapGestureRecognizer = UITapGestureRecognizer(target:self,  action:#selector(minimizeKeyboard(_:)))
@@ -50,12 +51,13 @@ class LogInController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
         if (passwordBool && password.text != "") {
             // login function
-            print("HELLO")
+            print("LOGIN")
         } else {
+            usernameActive = false
             password.text = ""
             passwordActive = true
             passwordBool = true
-            self.password.becomeFirstResponder()
+            password.becomeFirstResponder()
         }
         return true
     }

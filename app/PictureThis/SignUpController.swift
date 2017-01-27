@@ -21,6 +21,7 @@ class SignUpController: UIViewController, UITextFieldDelegate {
     var firstNameActive: Bool = false
     var lastNameActive: Bool = false
     var birthDateBool: Bool = false
+    var birthDateActive: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,22 +47,33 @@ class SignUpController: UIViewController, UITextFieldDelegate {
         else if (lastNameActive) {
             lastNameActive = false
             lastName.resignFirstResponder()
+        } else if (birthDateActive) {
+            birthDateActive = false
+            birthDate.resignFirstResponder()
         }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
-        if (textField == self.firstName) {
+        if (firstNameBool && lastNameBool && birthDateBool &&
+            firstName.text != "" && lastName.text != "" && birthDate.text != "") {
+            // SIGN UP
+            print("SIGN UP")
+        } else if (textField == self.firstName) {
             self.lastName.becomeFirstResponder()
             if (!lastNameBool) {
                 lastName.text = ""
             }
+            firstNameActive = false
             lastNameBool = true
+            lastNameActive = true
         } else if (textField == self.lastName) {
             self.birthDate.becomeFirstResponder()
             if (!birthDateBool) {
                 birthDate.text = ""
             }
+            lastNameActive = false
             birthDateBool = true
+            birthDateActive = true
         }
         return true
     }
@@ -70,6 +82,7 @@ class SignUpController: UIViewController, UITextFieldDelegate {
         if (birthDateBool == false) {
             birthDate.text = ""
         }
+        birthDateActive = true
         birthDateBool = true
     }
     
