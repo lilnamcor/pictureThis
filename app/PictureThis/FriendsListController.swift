@@ -8,8 +8,10 @@
 
 import UIKit
 
-class FriendsListController: UIViewController {
+class FriendsListController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet weak var friendsList: UITableView!
+    
     var globalImage = CIImage()
     var blurValue = 0.0
     var zoomValue = 0.0
@@ -20,8 +22,22 @@ class FriendsListController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        friendsList.dataSource = self
+        friendsList.allowsMultipleSelection = true
 
         // Do any additional setup after loading the view.
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "td")
+        cell.textLabel?.text = items[indexPath.row]
+        return cell
     }
 
     override func didReceiveMemoryWarning() {
