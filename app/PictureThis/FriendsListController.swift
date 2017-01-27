@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FriendsListController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class FriendsListController: UIViewController {
 
     @IBOutlet weak var friendsList: UITableView!
     
@@ -22,24 +22,10 @@ class FriendsListController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        friendsList.dataSource = self
-        friendsList.allowsMultipleSelection = true
 
         // Do any additional setup after loading the view.
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int
-    {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "td")
-        cell.textLabel?.text = items[indexPath.row]
-        return cell
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

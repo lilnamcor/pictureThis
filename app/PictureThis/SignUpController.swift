@@ -12,23 +12,21 @@ class SignUpController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var firstName: UITextField!
     @IBOutlet weak var lastName: UITextField!
-    @IBOutlet weak var birthDate: UITextField!
     @IBOutlet weak var sexField: UISegmentedControl!
     @IBOutlet weak var privacyPolicy: UILabel!
     @IBOutlet weak var signUp: UIButton!
+    @IBOutlet weak var logo: UIImageView!
     var firstNameBool: Bool = false
     var lastNameBool: Bool = false
     var firstNameActive: Bool = false
     var lastNameActive: Bool = false
-    var birthDateBool: Bool = false
-    var birthDateActive: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         firstName.delegate = self
         lastName.delegate = self
-        birthDate.delegate = self
         signUp.layer.cornerRadius = 5
+        logo.image = #imageLiteral(resourceName: "picturethis")
         let tapGestureRecognizer = UITapGestureRecognizer(target:self,  action:#selector(minimizeKeyboard(_:)))
         self.view.isUserInteractionEnabled = true
         self.view.addGestureRecognizer(tapGestureRecognizer)
@@ -47,15 +45,12 @@ class SignUpController: UIViewController, UITextFieldDelegate {
         else if (lastNameActive) {
             lastNameActive = false
             lastName.resignFirstResponder()
-        } else if (birthDateActive) {
-            birthDateActive = false
-            birthDate.resignFirstResponder()
         }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
-        if (firstNameBool && lastNameBool && birthDateBool &&
-            firstName.text != "" && lastName.text != "" && birthDate.text != "") {
+        if (firstNameBool && lastNameBool &&
+            firstName.text != "" && lastName.text != "") {
             // SIGN UP
             print("SIGN UP")
         } else if (textField == self.firstName) {
@@ -66,24 +61,8 @@ class SignUpController: UIViewController, UITextFieldDelegate {
             firstNameActive = false
             lastNameBool = true
             lastNameActive = true
-        } else if (textField == self.lastName) {
-            self.birthDate.becomeFirstResponder()
-            if (!birthDateBool) {
-                birthDate.text = ""
-            }
-            lastNameActive = false
-            birthDateBool = true
-            birthDateActive = true
         }
         return true
-    }
-
-    @IBAction func eraseBirthDate(_ sender: Any) {
-        if (birthDateBool == false) {
-            birthDate.text = ""
-        }
-        birthDateActive = true
-        birthDateBool = true
     }
     
     @IBAction func eraseFirst(_ sender: Any) {
