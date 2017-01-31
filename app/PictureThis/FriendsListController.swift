@@ -10,7 +10,6 @@ import UIKit
 
 class FriendsListController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
-
     @IBOutlet weak var friendsList: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var send: UIButton!
@@ -26,7 +25,6 @@ class FriendsListController: UIViewController, UITableViewDataSource, UITableVie
     var selectedFriends = [String]()
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
         searchBar.text = ""
         displayedFriends = allFriends
         friendsList.reloadData()
@@ -41,8 +39,9 @@ class FriendsListController: UIViewController, UITableViewDataSource, UITableVie
                 }
             }
         }
+        searchBar.resignFirstResponder()
     }
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
