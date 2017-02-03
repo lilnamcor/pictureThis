@@ -10,6 +10,7 @@ import UIKit
 
 class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet weak var topView: UIView!
     @IBOutlet weak var firstName: UITextField!
     @IBOutlet weak var lastName: UITextField!
     @IBOutlet weak var sexField: UISegmentedControl!
@@ -27,6 +28,9 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
     
     var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     
+    var daysInMonth = ["Jan": 31, "Feb" : 28, "Mar": 31, "Apr": 30, "May": 31, "Jun": 30, "Jul": 31,
+        "Aug": 31, "Sep": 30, "Oct": 31, "Nov": 30, "Dec": 31]
+    
     var firstNameBool: Bool = false
     var lastNameBool: Bool = false
     var firstNameActive: Bool = false
@@ -42,8 +46,8 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
         logo.image = #imageLiteral(resourceName: "picturethis")
         let tapGestureRecognizer = UITapGestureRecognizer(target:self,  action:#selector(minimizeKeyboard(_:)))
         tapGestureRecognizer.cancelsTouchesInView = false
-        self.view.isUserInteractionEnabled = true
-        self.view.addGestureRecognizer(tapGestureRecognizer)
+        topView.isUserInteractionEnabled = true
+        topView.addGestureRecognizer(tapGestureRecognizer)
         privacyPolicy.sizeToFit()
         privacyPolicy.adjustsFontSizeToFitWidth = true
         privacyPolicy.textAlignment = .center
@@ -61,14 +65,17 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
         monthTable.allowsMultipleSelection = false
         dayTable.allowsMultipleSelection = false
         yearTable.allowsMultipleSelection = false
-        
+                
         monthTable.isHidden = true
         dayTable.isHidden = true
         yearTable.isHidden = true
+        
+        let path = IndexPath(row: 20, section: 0)
+        
+        yearTable.scrollToRow(at: path, at: .top, animated: false)
     }
     
     func minimizeKeyboard(_ sender: UITapGestureRecognizer) {
-        print("FUCK")
         if (firstNameActive) {
             firstNameActive = false
             firstName.resignFirstResponder()
