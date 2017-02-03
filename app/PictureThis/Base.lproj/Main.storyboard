@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2659" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -464,6 +464,35 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kw3-Kw-pgn">
                                 <rect key="frame" x="0.0" y="-3" width="375" height="670"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vZZ-Hv-Fw9">
+                                        <rect key="frame" x="89" y="374" width="44" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" red="0.16754804109999999" green="0.27918077079999998" blue="0.58342778500000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Month"/>
+                                        <connections>
+                                            <action selector="monthAction:" destination="xpS-1l-9wM" eventType="touchUpInside" id="yxg-SI-evu"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Doc-My-dMG">
+                                        <rect key="frame" x="240" y="374" width="61" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" red="0.16754804109999999" green="0.27918077079999998" blue="0.58342778500000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Year"/>
+                                        <connections>
+                                            <action selector="yearAction:" destination="xpS-1l-9wM" eventType="touchUpInside" id="GKI-Hj-Ql1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Pi-Zi-McT">
+                                        <rect key="frame" x="172" y="374" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" red="0.16754804109999999" green="0.27918077079999998" blue="0.58342778500000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Day"/>
+                                        <connections>
+                                            <action selector="dayAction:" destination="xpS-1l-9wM" eventType="touchUpInside" id="0mi-JD-IGt"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CuD-Ox-lZE">
@@ -504,6 +533,7 @@
                                     <segment title="Male"/>
                                     <segment title="Female"/>
                                 </segments>
+                                <color key="tintColor" red="0.16754804109999999" green="0.27918077079999998" blue="0.58342778500000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rhg-Qn-Ynp">
                                 <rect key="frame" x="22" y="20" width="34" height="30"/>
@@ -534,30 +564,6 @@
                                 <rect key="frame" x="137" y="133" width="100" height="74"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vZZ-Hv-Fw9">
-                                <rect key="frame" x="103" y="373" width="44" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Month"/>
-                                <connections>
-                                    <action selector="monthAction:" destination="xpS-1l-9wM" eventType="touchUpInside" id="yxg-SI-evu"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Pi-Zi-McT">
-                                <rect key="frame" x="172" y="373" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Day"/>
-                                <connections>
-                                    <action selector="dayAction:" destination="xpS-1l-9wM" eventType="touchUpInside" id="0mi-JD-IGt"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Doc-My-dMG">
-                                <rect key="frame" x="227" y="374" width="61" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Year"/>
-                                <connections>
-                                    <action selector="yearAction:" destination="xpS-1l-9wM" eventType="touchUpInside" id="GKI-Hj-Ql1"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="p8t-FJ-db5">
                                 <rect key="frame" x="78" y="401" width="64" height="137"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -609,83 +615,107 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w06-c9-xjt">
-                                <rect key="frame" x="139" y="28" width="64" height="21"/>
+                                <rect key="frame" x="156" y="28" width="64" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBT-os-Ygi">
-                                <rect key="frame" x="274" y="28" width="30" height="30"/>
+                                <rect key="frame" x="306" y="24" width="53" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Edit"/>
+                                <connections>
+                                    <action selector="editAction:" destination="B0k-n0-8hh" eventType="touchUpInside" id="rkl-zR-ha4"/>
+                                </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Username" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U2p-cQ-5GK">
-                                <rect key="frame" x="123" y="93" width="97" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Email" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U2p-cQ-5GK">
+                                <rect key="frame" x="37" y="243" width="300" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Password" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iyH-H4-iCg">
-                                <rect key="frame" x="123" y="143" width="97" height="30"/>
+                                <rect key="frame" x="37" y="278" width="300" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Dyv-s8-AeM">
-                                <rect key="frame" x="113" y="195" width="117" height="29"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Dyv-s8-AeM" userLabel="Gender">
+                                <rect key="frame" x="127" y="332" width="117" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="Male"/>
                                     <segment title="Female"/>
                                 </segments>
+                                <color key="tintColor" red="0.16754804109999999" green="0.27918077079999998" blue="0.58342778500000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bgn-4M-nG3">
-                                <rect key="frame" x="6" y="19" width="34" height="30"/>
+                                <rect key="frame" x="16" y="23" width="34" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="back"/>
                                 <connections>
                                     <segue destination="V4Q-qI-C97" kind="show" id="uxm-Kc-Ebh"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nrM-Gc-9O9">
-                                <rect key="frame" x="70" y="253" width="44" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Last Name" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ruc-pE-exR">
+                                <rect key="frame" x="37" y="191" width="300" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Month"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="First Name" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kKv-hI-cnF">
+                                <rect key="frame" x="37" y="156" width="300" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nrM-Gc-9O9">
+                                <rect key="frame" x="89" y="368" width="44" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Month">
+                                    <color key="titleColor" red="0.16754804109999999" green="0.27918077079999998" blue="0.58342778500000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="monthAction:" destination="B0k-n0-8hh" eventType="touchUpInside" id="sjk-g9-JzT"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tXP-wr-8Fs">
-                                <rect key="frame" x="156" y="253" width="30" height="30"/>
+                                <rect key="frame" x="170" y="368" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Day"/>
+                                <state key="normal" title="Day">
+                                    <color key="titleColor" red="0.16754804109999999" green="0.27918077079999998" blue="0.58342778500000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="dayAction:" destination="B0k-n0-8hh" eventType="touchUpInside" id="q0J-bu-s5e"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vBQ-NM-NhJ">
-                                <rect key="frame" x="222" y="253" width="61" height="30"/>
+                                <rect key="frame" x="231" y="368" width="61" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Year"/>
+                                <state key="normal" title="Year">
+                                    <color key="titleColor" red="0.16754804109999999" green="0.27918077079999998" blue="0.58342778500000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="yearAction:" destination="B0k-n0-8hh" eventType="touchUpInside" id="8kg-Iz-xu2"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="39w-ph-M26">
-                                <rect key="frame" x="60" y="291" width="64" height="137"/>
+                                <rect key="frame" x="79" y="406" width="64" height="137"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QIi-2j-SUC">
-                                <rect key="frame" x="139" y="291" width="64" height="137"/>
+                                <rect key="frame" x="154" y="406" width="64" height="137"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kU2-ur-N31">
-                                <rect key="frame" x="222" y="291" width="73" height="137"/>
+                                <rect key="frame" x="225" y="406" width="73" height="137"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -693,20 +723,23 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="Gender" destination="Dyv-s8-AeM" id="nY5-X3-B2j"/>
-                        <outlet property="Password" destination="iyH-H4-iCg" id="Ytd-sT-H9C"/>
-                        <outlet property="Username" destination="U2p-cQ-5GK" id="r9e-xZ-qku"/>
                         <outlet property="day" destination="tXP-wr-8Fs" id="9ih-eI-bnw"/>
                         <outlet property="dayTable" destination="QIi-2j-SUC" id="n09-2b-uwT"/>
+                        <outlet property="edit" destination="YBT-os-Ygi" id="hjI-Aq-5ee"/>
+                        <outlet property="email" destination="U2p-cQ-5GK" id="yld-iI-ZBc"/>
+                        <outlet property="firstName" destination="kKv-hI-cnF" id="uFz-dm-TmU"/>
+                        <outlet property="gender" destination="Dyv-s8-AeM" id="prt-He-gcr"/>
+                        <outlet property="lastName" destination="ruc-pE-exR" id="2mc-dg-LnU"/>
                         <outlet property="month" destination="nrM-Gc-9O9" id="0Jw-Gu-fja"/>
                         <outlet property="monthTable" destination="39w-ph-M26" id="zLx-gz-c2d"/>
+                        <outlet property="password" destination="iyH-H4-iCg" id="tEA-c0-3cR"/>
                         <outlet property="year" destination="vBQ-NM-NhJ" id="os4-f8-QGn"/>
                         <outlet property="yearTable" destination="kU2-ur-N31" id="ahv-9p-VzN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bsH-CF-Yt4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="877.5" y="658.09859154929575"/>
+            <point key="canvasLocation" x="876" y="657.12143928035982"/>
         </scene>
     </scenes>
     <resources>
@@ -721,8 +754,8 @@
         <image name="picturethis" width="626" height="626"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="uxm-Kc-Ebh"/>
-        <segue reference="ZwF-jn-Gex"/>
+        <segue reference="XPY-qz-m2H"/>
+        <segue reference="Xb9-Vh-6rJ"/>
         <segue reference="khM-za-NPX"/>
     </inferredMetricsTieBreakers>
 </document>

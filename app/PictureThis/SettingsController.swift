@@ -10,12 +10,16 @@ import UIKit
 
 class SettingsController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
 
-    @IBOutlet weak var Username: UITextField!
-    @IBOutlet weak var Gender: UISegmentedControl!
-    @IBOutlet weak var Password: UITextField!
+    
+    @IBOutlet weak var firstName: UITextField!
+    @IBOutlet weak var lastName: UITextField!
+    @IBOutlet weak var email: UITextField!
+    @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var gender: UISegmentedControl!
     @IBOutlet weak var month: UIButton!
     @IBOutlet weak var day: UIButton!
     @IBOutlet weak var year: UIButton!
+    @IBOutlet weak var edit: UIButton!
     @IBOutlet weak var monthTable: UITableView!
     @IBOutlet weak var dayTable: UITableView!
     @IBOutlet weak var yearTable: UITableView!
@@ -23,6 +27,8 @@ class SettingsController: UIViewController, UITextFieldDelegate, UITableViewData
     var monthVal = ""
     var dayVal = ""
     var yearVal = ""
+    
+    var editMode = false
     
     var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     
@@ -32,8 +38,16 @@ class SettingsController: UIViewController, UITextFieldDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Username.delegate = self
-        Password.delegate = self
+        firstName.isEnabled = false
+        lastName.isEnabled = false
+        email.isEnabled = false
+        password.isEnabled = false
+        gender.isEnabled = false
+        month.isEnabled = false
+        day.isEnabled = false
+        year.isEnabled = false
+        email.delegate = self
+        password.delegate = self
         
         monthTable.delegate = self
         dayTable.delegate = self
@@ -55,19 +69,59 @@ class SettingsController: UIViewController, UITextFieldDelegate, UITableViewData
         
         yearTable.scrollToRow(at: path, at: .top, animated: false)
         
-        Username.text = "PENIS"
-        Password.text = "*****"
+        email.text = "PENIS"
+        password.text = "*****"
         
         // Do any additional setup after loading the view.
         // Do any additional setup after loading the view.
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
-        if (textField == self.Username) {
-            self.Password.becomeFirstResponder()
+        if (textField == self.email) {
+            self.password.becomeFirstResponder()
         }
         return true
     }
+    
+    
+    @IBAction func editAction(_ sender: Any) {
+        if (editMode == false) {
+            firstName.isEnabled = true
+            lastName.isEnabled = true
+            email.isEnabled = true
+            password.isEnabled = true
+            gender.isEnabled = true
+            month.isEnabled = true
+            day.isEnabled = true
+            year.isEnabled = true
+            edit.setTitle("save", for: .normal)
+            firstName.textColor = UIColor.black
+            lastName.textColor = UIColor.black
+            email.textColor = UIColor.black
+            password.textColor = UIColor.black
+            editMode = true
+        } else {
+            firstName.isEnabled = false
+            lastName.isEnabled = false
+            email.isEnabled = false
+            password.isEnabled = false
+            gender.isEnabled = false
+            month.isEnabled = false
+            day.isEnabled = false
+            year.isEnabled = false
+            monthTable.isHidden = true
+            dayTable.isHidden = true
+            yearTable.isHidden = true
+            firstName.textColor = UIColor.lightGray
+            lastName.textColor = UIColor.lightGray
+            email.textColor = UIColor.lightGray
+            password.textColor = UIColor.lightGray
+            editMode = false
+            edit.setTitle("edit", for: .normal)
+        }
+        
+    }
+    
     
     @IBAction func Username(_ sender: Any) {
     }

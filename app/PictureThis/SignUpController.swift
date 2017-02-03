@@ -89,6 +89,14 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
         yearTable.isHidden = true
     }
  
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if (textField == firstName) { firstName.textColor = UIColor.black
+        }
+        else if (textField == lastName) {
+            lastName.textColor = UIColor.black
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
         if (firstNameBool && lastNameBool &&
             firstName.text != "" && lastName.text != "") {
