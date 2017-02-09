@@ -10,19 +10,37 @@ import UIKit
 
 class SettingsController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
 
-    @IBOutlet weak var Username: UITextField!
-    @IBOutlet weak var Gender: UISegmentedControl!
-    @IBOutlet weak var Password: UITextField!
+    
+    @IBOutlet weak var logo: UIImageView!
+    @IBOutlet weak var firstName: UITextField!
+    @IBOutlet weak var lastName: UITextField!
+    @IBOutlet weak var email: UITextField!
+    @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var gender: UISegmentedControl!
     @IBOutlet weak var month: UIButton!
     @IBOutlet weak var day: UIButton!
     @IBOutlet weak var year: UIButton!
+    @IBOutlet weak var edit: UIButton!
     @IBOutlet weak var monthTable: UITableView!
     @IBOutlet weak var dayTable: UITableView!
     @IBOutlet weak var yearTable: UITableView!
+    @IBOutlet weak var topView: UIView!
+    
+    var firstNameBool: Bool = false
+    var lastNameBool: Bool = false
+    var firstNameActive: Bool = false
+    var lastNameActive: Bool = false
+    
+    var emailBool: Bool = false
+    var passwordBool: Bool = false
+    var emailActive: Bool = false
+    var passwordActive: Bool = false
     
     var monthVal = ""
     var dayVal = ""
     var yearVal = ""
+    
+    var editMode = false
     
     var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     
@@ -33,9 +51,25 @@ class SettingsController: UIViewController, UITextFieldDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Username.delegate = self
-        Password.delegate = self
+        logo.image = #imageLiteral(resourceName: "picturethis")
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self,  action:#selector(minimizeKeyboard(_:)))
+        tapGestureRecognizer.cancelsTouchesInView = false
+        topView.isUserInteractionEnabled = true
+        topView.addGestureRecognizer(tapGestureRecognizer)
         
+        firstName.isEnabled = false
+        lastName.isEnabled = false
+        email.isEnabled = false
+        password.isEnabled = false
+        gender.isEnabled = false
+        month.isEnabled = false
+        day.isEnabled = false
+        year.isEnabled = false
+        
+        firstName.delegate = self
+        lastName.delegate = self
+        email.delegate = self
+        password.delegate = self
         monthTable.delegate = self
         dayTable.delegate = self
         yearTable.delegate = self
@@ -56,20 +90,110 @@ class SettingsController: UIViewController, UITextFieldDelegate, UITableViewData
         
         yearTable.scrollToRow(at: path, at: .top, animated: false)
         
-        Username.text = "PENIS"
-        Password.text = "*****"
+        email.text = "PENIS"
+        password.text = "*****"
         
         // Do any additional setup after loading the view.
         // Do any additional setup after loading the view.
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
-        if (textField == self.Username) {
-            self.Password.becomeFirstResponder()
+        print("WHAT")
+        if (textField == self.firstName) {
+            self.lastName.becomeFirstResponder()
+            firstNameActive = false
+            lastNameActive = true
+        }
+        else if (textField == self.lastName) {
+            self.email.becomeFirstResponder()
+            lastNameActive = false
+            emailActive = true
+        }
+        else if (textField == self.email) {
+            self.password.becomeFirstResponder()
+            emailActive = false
+            passwordActive = true
+        } else {
+            self.email.resignFirstResponder()
         }
         return true
     }
-
+    
+    func minimizeKeyboard(_ sender: UITapGestureRecognizer) {
+        if (firstNameActive) {
+            firstNameActive = false
+            firstName.resignFirstResponder()
+        }
+        else if (lastNameActive) {
+            lastNameActive = false
+            lastName.resignFirstResponder()
+        }
+        else if (emailActive) {
+            emailActive = false
+            email.resignFirstResponder()
+        }
+        else if (passwordActive) {
+            passwordActive = false
+            password.resignFirstResponder()
+        }
+        monthTable.isHidden = true
+        dayTable.isHidden = true
+        yearTable.isHidden = true
+    }
+    
+    @IBAction func editAction(_ sender: Any) {
+        if (editMode == false) {
+            firstName.isEnabled = true
+            lastName.isEnabled = true
+            email.isEnabled = true
+            password.isEnabled = true
+            gender.isEnabled = true
+            month.isEnabled = true
+            day.isEnabled = true
+            year.isEnabled = true
+            edit.setTitle("save", for: .normal)
+            firstName.textColor = UIColor.black
+            lastName.textColor = UIColor.black
+            email.textColor = UIColor.black
+            password.textColor = UIColor.black
+            editMode = true
+        } else {
+            firstName.isEnabled = false
+            lastName.isEnabled = false
+            email.isEnabled = false
+            password.isEnabled = false
+            gender.isEnabled = false
+            month.isEnabled = false
+            day.isEnabled = false
+            year.isEnabled = false
+            monthTable.isHidden = true
+            dayTable.isHidden = true
+            yearTable.isHidden = true
+            firstName.textColor = UIColor.lightGray
+            lastName.textColor = UIColor.lightGray
+            email.textColor = UIColor.lightGray
+            password.textColor = UIColor.lightGray
+            editMode = false
+            edit.setTitle("edit", for: .normal)
+        }
+        
+    }
+    @IBAction func firstNameAction(_ sender: Any) {
+        firstNameActive = true
+    }
+    
+    @IBAction func lastNameAction(_ sender: Any) {
+        lastNameActive = true
+    }
+    
+    @IBAction func emailAction(_ sender: Any) {
+        emailActive = true
+    }
+    
+    @IBAction func passwordAction(_ sender: Any) {
+        passwordActive = true
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
