@@ -64,7 +64,7 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
                 zoom.setImage(#imageLiteral(resourceName: "Logo"), for: .normal)
                 brightness.setImage(#imageLiteral(resourceName: "Brightness"), for: .normal)
                 if (brightnessActive) {
-                    imageView.image = ImageFilters.filters.applyFilters(blurValue: 0.0, brightnessValue: self.brightnessValue)
+                    imageView.image = ImageFilters.filters.applyFilters(blurValue: 0.0, brightnessValue: self.brightnessValue, image: CameraOperations.camera.getGlobalImage())
                 } else{
                     imageView.image = ImageFilters.filters.getImageFromCIImage(image: CameraOperations.camera.getGlobalImage())
                 }
@@ -84,7 +84,7 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
                 blur.setImage(#imageLiteral(resourceName: "Blur"), for: .normal)
                 zoom.setImage(#imageLiteral(resourceName: "Logo"), for: .normal)
                 if (brightnessActive) {
-                    imageView.image = ImageFilters.filters.applyFilters(blurValue: self.blurValue, brightnessValue: 0.0)
+                    imageView.image = ImageFilters.filters.applyFilters(blurValue: self.blurValue, brightnessValue: 0.0, image: CameraOperations.camera.getGlobalImage())
                 } else{
                     imageView.image = ImageFilters.filters.getImageFromCIImage(image: CameraOperations.camera.getGlobalImage())
                 }
@@ -131,9 +131,9 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
             if (abs(blurValue - prevBlurValue) > 0.1) {
                 prevBlurValue = blurValue
                 if (brightnessActive) {
-                    imageView.image = ImageFilters.filters.applyFilters(blurValue: blurValue, brightnessValue: brightnessValue)
+                    imageView.image = ImageFilters.filters.applyFilters(blurValue: blurValue, brightnessValue: brightnessValue, image: CameraOperations.camera.getGlobalImage())
                 } else {
-                    imageView.image = ImageFilters.filters.applyFilters(blurValue: blurValue, brightnessValue: 0.0)
+                    imageView.image = ImageFilters.filters.applyFilters(blurValue: blurValue, brightnessValue: 0.0, image: CameraOperations.camera.getGlobalImage())
                 }
             }
         } else if (zoomPressed) {
@@ -142,9 +142,9 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
         } else {
             brightnessValue = Double(slider.value)
             if (blurActive) {
-                imageView.image = ImageFilters.filters.applyFilters(blurValue: blurValue, brightnessValue: brightnessValue)
+                imageView.image = ImageFilters.filters.applyFilters(blurValue: blurValue, brightnessValue: brightnessValue, image: CameraOperations.camera.getGlobalImage())
             } else {
-                imageView.image = ImageFilters.filters.applyFilters(blurValue: 0.0, brightnessValue: brightnessValue)
+                imageView.image = ImageFilters.filters.applyFilters(blurValue: 0.0, brightnessValue: brightnessValue, image: CameraOperations.camera.getGlobalImage())
             }
 
         }
@@ -168,9 +168,9 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
             notifications.isEnabled = true
             notifications.isHidden = false
             if (brightnessActive) {
-                imageView.image = ImageFilters.filters.applyFilters(blurValue: blurValue, brightnessValue: brightnessValue)
+                imageView.image = ImageFilters.filters.applyFilters(blurValue: blurValue, brightnessValue: brightnessValue, image: CameraOperations.camera.getGlobalImage())
             } else {
-                imageView.image = ImageFilters.filters.applyFilters(blurValue: blurValue, brightnessValue: 0.0)
+                imageView.image = ImageFilters.filters.applyFilters(blurValue: blurValue, brightnessValue: 0.0, image: CameraOperations.camera.getGlobalImage())
             }
         } else {
             slider.isHidden = true
@@ -236,9 +236,9 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
             notifications.isEnabled = true
             notifications.isHidden = false
             if (blurActive) {
-                imageView.image = ImageFilters.filters.applyFilters(blurValue: blurValue, brightnessValue: brightnessValue)
+                imageView.image = ImageFilters.filters.applyFilters(blurValue: blurValue, brightnessValue: brightnessValue, image: CameraOperations.camera.getGlobalImage())
             } else {
-                imageView.image = ImageFilters.filters.applyFilters(blurValue: 0.0, brightnessValue: brightnessValue)
+                imageView.image = ImageFilters.filters.applyFilters(blurValue: 0.0, brightnessValue: brightnessValue, image: CameraOperations.camera.getGlobalImage())
             }
         } else {
             slider.isHidden = true
@@ -458,7 +458,7 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
         if (captureMode) {
             CameraOperations.camera.getCameraFeed(imageView: imageView)
         } else {
-            imageView.image = ImageFilters.filters.applyFilters(blurValue: self.blurValue, brightnessValue: self.brightnessValue)
+            imageView.image = ImageFilters.filters.applyFilters(blurValue: self.blurValue, brightnessValue: self.brightnessValue, image: CameraOperations.camera.getGlobalImage())
         }
     }
     

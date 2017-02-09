@@ -37,14 +37,14 @@ final class ImageFilters: NSObject {
         //return UIImage(ciImage:image, scale:1, orientation:UIImageOrientation(rawValue: 0)!)
     }
     
-    func applyFilters(blurValue: Double, brightnessValue: Double) -> UIImage {
+    func applyFilters(blurValue: Double, brightnessValue: Double, image: CIImage) -> UIImage {
         if (blurValue == 0 && brightnessValue == 0) {
-            return self.getImageFromCIImage(image: CameraOperations.camera.getGlobalImage())!
+            return self.getImageFromCIImage(image: image)!
         }
         var toReturn = CIImage()
         if (blurValue != prevBlur) {
             let temp = blurValue * 5 + 1
-            self.blurFilter.setValue(CameraOperations.camera.getGlobalImage(), forKey: "inputImage")
+            self.blurFilter.setValue(image, forKey: "inputImage")
             self.blurFilter.setValue(temp, forKey: "inputRadius")
             self.setBlurImage(image: self.blurFilter.outputImage!)
             toReturn = self.getBlurImage()

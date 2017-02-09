@@ -29,6 +29,7 @@ class SettingsController: UIViewController, UITextFieldDelegate, UITableViewData
     var daysInMonth = ["Jan": 31, "Feb" : 28, "Mar": 31, "Apr": 30, "May": 31, "Jun": 30, "Jul": 31,
                        "Aug": 31, "Sep": 30, "Oct": 31, "Nov": 30, "Dec": 31]
 
+    var selectedMonth = "Jan"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,15 +69,6 @@ class SettingsController: UIViewController, UITextFieldDelegate, UITableViewData
         }
         return true
     }
-    
-    @IBAction func Username(_ sender: Any) {
-    }
-    
-    @IBAction func Password(_ sender: Any) {
-    }
-    
-    @IBAction func Gender(_ sender: Any) {
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -107,6 +99,8 @@ class SettingsController: UIViewController, UITextFieldDelegate, UITableViewData
                 monthTable.isHidden = true
                 dayTable.isHidden = true
                 yearTable.isHidden = true
+                selectedMonth = monthVal
+                dayTable.reloadData()
             }
         } else if (tableView == dayTable) {
             if let selectedRow = tableView.cellForRow(at: indexPath) {

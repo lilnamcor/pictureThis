@@ -31,6 +31,8 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
     var daysInMonth = ["Jan": 31, "Feb" : 28, "Mar": 31, "Apr": 30, "May": 31, "Jun": 30, "Jul": 31,
         "Aug": 31, "Sep": 30, "Oct": 31, "Nov": 30, "Dec": 31]
     
+    var selectedMonth = "Jan"
+    
     var firstNameBool: Bool = false
     var lastNameBool: Bool = false
     var firstNameActive: Bool = false
@@ -69,6 +71,7 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
         monthTable.isHidden = true
         dayTable.isHidden = true
         yearTable.isHidden = true
+        
         
         let path = IndexPath(row: 20, section: 0)
         
@@ -147,6 +150,8 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
                 monthTable.isHidden = true
                 dayTable.isHidden = true
                 yearTable.isHidden = true
+                selectedMonth = monthVal
+                dayTable.reloadData()
             }
         } else if (tableView == dayTable) {
             if let selectedRow = tableView.cellForRow(at: indexPath) {
@@ -171,7 +176,7 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
         if (tableView == monthTable) {
             return 12
         } else if (tableView == dayTable) {
-            return 31
+            return daysInMonth[selectedMonth]!
         } else {
             return 100
         }
