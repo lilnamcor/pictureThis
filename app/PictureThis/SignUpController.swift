@@ -13,6 +13,8 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var firstName: UITextField!
     @IBOutlet weak var lastName: UITextField!
+    @IBOutlet weak var email: UITextField!
+    @IBOutlet weak var password: UITextField!
     @IBOutlet weak var sexField: UISegmentedControl!
     @IBOutlet weak var privacyPolicy: UILabel!
     @IBOutlet weak var signUp: UIButton!
@@ -36,6 +38,11 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
     var firstNameActive: Bool = false
     var lastNameActive: Bool = false
     
+    var emailBool: Bool = false
+    var passwordBool: Bool = false
+    var emailActive: Bool = false
+    var passwordActive: Bool = false
+    
     var monthVal = ""
     var dayVal = ""
     var yearVal = ""
@@ -54,6 +61,8 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
         
         firstName.delegate = self
         lastName.delegate = self
+        email.delegate = self
+        password.delegate = self
         monthTable.delegate = self
         dayTable.delegate = self
         yearTable.delegate = self
@@ -84,6 +93,14 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
             lastNameActive = false
             lastName.resignFirstResponder()
         }
+        else if (emailActive) {
+            emailActive = false
+            email.resignFirstResponder()
+        }
+        else if (passwordActive) {
+            passwordActive = false
+            password.resignFirstResponder()
+        }
         monthTable.isHidden = true
         dayTable.isHidden = true
         yearTable.isHidden = true
@@ -95,11 +112,17 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
         else if (textField == lastName) {
             lastName.textColor = UIColor.black
         }
+        else if (textField == email) {
+            email.textColor = UIColor.black
+        }
+        else if (textField == password) {
+            password.textColor = UIColor.black
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
-        if (firstNameBool && lastNameBool &&
-            firstName.text != "" && lastName.text != "") {
+        if (firstNameBool && lastNameBool && emailBool && passwordBool &&
+            firstName.text != "" && lastName.text != "" && email.text != "" && password.text != "") {
             // SIGN UP
         } else if (textField == self.firstName) {
             self.lastName.becomeFirstResponder()
@@ -109,6 +132,22 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
             firstNameActive = false
             lastNameBool = true
             lastNameActive = true
+        } else if (textField == self.lastName) {
+            self.email.becomeFirstResponder()
+            if (!emailBool) {
+                email.text = ""
+            }
+            lastNameActive = false
+            emailBool   = true
+            emailActive = true
+        } else if (textField == self.email) {
+            self.password.becomeFirstResponder()
+            if (!passwordBool) {
+                password.text = ""
+            }
+            emailActive = false
+            passwordBool = true
+            passwordActive = true
         }
         return true
     }
@@ -127,6 +166,22 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
         }
         lastNameActive = true
         lastNameBool = true
+    }
+    
+    @IBAction func eraseEmail(_ sender: Any) {
+        if (emailBool == false) {
+            email.text = ""
+        }
+        emailActive = true
+        emailBool = true
+    }
+    
+    @IBAction func erasePassword(_ sender: Any) {
+        if (passwordBool == false) {
+            password.text = ""
+        }
+        passwordActive = true
+        passwordBool = true
     }
     
     @IBAction func monthAction(_ sender: Any) {
