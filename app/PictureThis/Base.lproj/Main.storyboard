@@ -507,8 +507,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Cj-Sb-uLB">
                                 <rect key="frame" x="314" y="602" width="45" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.064831479060000002" green="0.064831479060000002" blue="0.064831479060000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" image="Send"/>
+                                <state key="normal" image="Send black"/>
                                 <connections>
                                     <action selector="sendAction:" destination="G9q-Sr-6eS" eventType="touchUpInside" id="Ppg-vK-IBd"/>
                                     <action selector="sendAction:" destination="V4Q-qI-C97" eventType="touchUpInside" id="mAl-Mq-TrF"/>
@@ -876,14 +875,14 @@
         <image name="Lives" width="125" height="102"/>
         <image name="Logo" width="93" height="93"/>
         <image name="Notification" width="94" height="93"/>
-        <image name="Send" width="119" height="119"/>
+        <image name="Send black" width="131" height="131"/>
         <image name="Settings" width="93" height="93"/>
         <image name="picturethis" width="626" height="626"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="U1M-Hh-DYX"/>
-        <segue reference="H4y-A1-pmb"/>
+        <segue reference="Dxn-IB-7jk"/>
+        <segue reference="3BP-zb-opO"/>
         <segue reference="vqW-lW-UuY"/>
-        <segue reference="fHL-vS-4Vm"/>
+        <segue reference="H4y-A1-pmb"/>
     </inferredMetricsTieBreakers>
 </document>
