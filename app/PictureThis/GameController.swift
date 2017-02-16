@@ -8,14 +8,16 @@
 
 import UIKit
 
-class GameController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, KeyboardDelegate {
+class GameController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
 
+    /*
     func keyWasTapped(character: String) {
         print(character)
         print(answerField.text)
         checkLetter(lastChar: character.lowercased())
         print(answerField.text)
     }
+ */
     
     var currentFriend = ""
     var answer = ""
@@ -31,6 +33,9 @@ class GameController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     @IBOutlet weak var life1: UIImageView!
     @IBOutlet weak var life2: UIImageView!
     @IBOutlet weak var life3: UIImageView!
+    @IBOutlet weak var life4: UIImageView!
+    @IBOutlet weak var life5: UIImageView!
+    @IBOutlet weak var life6: UIImageView!
     
     var MAXZOOM = 6.0
     
@@ -47,6 +52,7 @@ class GameController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        /*
         // initialize custom keyboard
         let keyboardView = Keyboard(frame: CGRect(x: 0, y: 0, width: 0, height: 300))
         keyboardView.delegate = self // the view controller will be notified by the keyboard whenever a key is tapped
@@ -54,6 +60,7 @@ class GameController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         // replace system keyboard with custom keyboard
         answerField.inputView = keyboardView
         
+*/
         // get these from server
         answer = "hello"
         var allLetters = Set<Character>()
@@ -80,6 +87,7 @@ class GameController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         answerField.delegate = self
         answerField.text = currentText
         answerField.tintColor = UIColor.clear
+        answerField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         let tapGestureRecognizer = UITapGestureRecognizer(target:self,  action:#selector(keyboardAction(_:)))
         tapGestureRecognizer.cancelsTouchesInView = false
         self.view.isUserInteractionEnabled = true
@@ -124,11 +132,12 @@ class GameController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         return toReturn
     }
     
-    func checkLetter(lastChar: String) {
-        print("SHIT")
-        print(lastChar)
+    //func checkLetter(lastChar: String) {
+    func textFieldDidChange(_ textField: UITextField) {
         let text = answerField.text
-        let indexCorrect = correctGuesses.lowercased().range(of:lastChar)
+        let lastChar = text?.substring(from:(text?.index((text?.endIndex)!, offsetBy: -1))!)
+        print(lastChar)
+        let indexCorrect = correctGuesses.lowercased().range(of:lastChar!)
         var indices = [Int]()
         var count = 0
         for letter in answer.characters {
@@ -140,8 +149,8 @@ class GameController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         }
         if (indices.count > 0 && indexCorrect == nil) {
             numRightGuesses += 1
-            correctGuesses += lastChar
-            answerField.text = replace(str: currentText, indices: indices, char: Character(lastChar))
+            correctGuesses += lastChar!
+            answerField.text = replace(str: currentText, indices: indices, char: Character(lastChar!))
             currentText = answerField.text!
             let curEffect = (uniqueLetters-numRightGuesses)/uniqueLetters
             image.image = ImageFilters.filters.applyFilters(blurValue: (blur*curEffect), brightnessValue: (brightness*curEffect), image: CIImage(cgImage: (finalImage.cgImage!)))
@@ -150,12 +159,18 @@ class GameController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
             answerField.text = currentText
             numWrongGuesses += 1
             if (numWrongGuesses == 1) {
-                life3.isHidden = true
+                life6.isHidden = true
             } else if (numWrongGuesses == 2) {
-                life2.isHidden = true
-            } else {
-                life1.isHidden = true
+                life5.isHidden = true
+            } else if (numWrongGuesses == 3){
+                life4.isHidden = true
                 // game over
+            } else if (numWrongGuesses == 4) {
+                life3.isHidden = true
+            } else if (numWrongGuesses == 5) {
+                life2.isHidden = true
+            } else if (numWrongGuesses == 6) {
+                life1.isHidden = true
             }
         }
         
