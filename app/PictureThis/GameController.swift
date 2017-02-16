@@ -8,17 +8,29 @@
 
 import UIKit
 
-class GameController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
+class GameController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, KeyboardDelegate {
 
+    func keyWasTapped(character: String) {
+        print(character)
+        print(answerField.text)
+        checkLetter(lastChar: character.lowercased())
+        print(answerField.text)
+    }
+    
     var currentFriend = ""
     var answer = ""
-    var lenAnswer = 0.0
+    var uniqueLetters = 0.0
     var keyboardActive = false
     var currentText = ""
     var numWrongGuesses = 0.0
+    var correctGuesses = ""
     var numRightGuesses = 0.0
     
     var finalImage = UIImage()
+    
+    @IBOutlet weak var life1: UIImageView!
+    @IBOutlet weak var life2: UIImageView!
+    @IBOutlet weak var life3: UIImageView!
     
     var MAXZOOM = 6.0
     
@@ -35,10 +47,21 @@ class GameController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // initialize custom keyboard
+        let keyboardView = Keyboard(frame: CGRect(x: 0, y: 0, width: 0, height: 300))
+        keyboardView.delegate = self // the view controller will be notified by the keyboard whenever a key is tapped
+        
+        // replace system keyboard with custom keyboard
+        answerField.inputView = keyboardView
+        
         // get these from server
-        answer = "Akhil"
-        lenAnswer = Double(answer.characters.count)
-        finalImage = #imageLiteral(resourceName: "Cat")
+        answer = "hello"
+        var allLetters = Set<Character>()
+        for letter in answer.characters {
+            allLetters.insert(letter)
+        }
+        uniqueLetters = Double(allLetters.count)
+        finalImage = #imageLiteral(resourceName: "akhil")
         image.image = finalImage
         blur = 1.0
         zoom = 0.33
@@ -48,25 +71,21 @@ class GameController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         ImageFilters.filters.setBlurImage(image: CIImage(cgImage: (image.image?.cgImage!)!))
         image.image = ImageFilters.filters.applyFilters(blurValue: blur, brightnessValue: brightness, image: CIImage(cgImage: (image.image?.cgImage!)!))
         
-        var temp = ""
         for _ in answer.characters {
-            temp += "_ "
+            currentText += "_ "
         }
         
         
         
         answerField.delegate = self
-        currentText = temp
-        answerField.text = temp
+        answerField.text = currentText
         answerField.tintColor = UIColor.clear
-        answerField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         let tapGestureRecognizer = UITapGestureRecognizer(target:self,  action:#selector(keyboardAction(_:)))
         tapGestureRecognizer.cancelsTouchesInView = false
         self.view.isUserInteractionEnabled = true
         self.view.addGestureRecognizer(tapGestureRecognizer)
-        self.scrollView.bouncesZoom = true
         self.scrollView.isUserInteractionEnabled = false
-        self.scrollView.minimumZoomScale = 1.0;
+        self.scrollView.minimumZoomScale = 1.0
         self.scrollView.maximumZoomScale = CGFloat(self.MAXZOOM)
         self.scrollView.delegate = self
         // Do any additional setup after loading the view.
@@ -77,7 +96,6 @@ class GameController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        image.frame = self.view.layer.bounds
         self.scrollView.zoomScale = CGFloat(self.zoom*(self.MAXZOOM-1)+1)
         self.scrollView.contentOffset.x = CGFloat(self.xOffset)
         self.scrollView.contentOffset.y = CGFloat(self.yOffset)
@@ -96,25 +114,48 @@ class GameController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         return myString.substring(to: (firstIndex)) + newCharac + myString.substring(from: lastIndex)
     }
     
-    func textFieldDidChange(_ textField: UITextField) {
-        //your code
-        let text = textField.text
-        let lastChar = text?.substring(from:(text?.index((text?.endIndex)!, offsetBy: -1))!)
-        let index = answer.lowercased().range(of:lastChar!)
-        textField.text = currentText
-        // correct guess
-        if index != nil {
+    func replace(str:String, indices:[Int], char: Character) -> String {
+        var toReturn = str
+        for i in indices {
+            let index = str.index(str.startIndex, offsetBy: i*2)
+            toReturn.remove(at: index)
+            toReturn.insert(char, at: index)
+        }
+        return toReturn
+    }
+    
+    func checkLetter(lastChar: String) {
+        print("SHIT")
+        print(lastChar)
+        let text = answerField.text
+        let indexCorrect = correctGuesses.lowercased().range(of:lastChar)
+        var indices = [Int]()
+        var count = 0
+        for letter in answer.characters {
+            print(letter)
+            if (String(letter) == lastChar) {
+                indices.append(count)
+            }
+            count += 1
+        }
+        if (indices.count > 0 && indexCorrect == nil) {
             numRightGuesses += 1
-            textField.text = replace(myString: textField.text!, index: (index?.lowerBound)!, newCharac: lastChar!)
-            currentText = textField.text!
-            image.image = ImageFilters.filters.applyFilters(blurValue: ((blur*(lenAnswer-numRightGuesses))/lenAnswer), brightnessValue: ((brightness*(lenAnswer-numRightGuesses))/lenAnswer), image: CIImage(cgImage: (finalImage.cgImage!)))
-            self.scrollView.zoomScale = CGFloat(((self.zoom*(lenAnswer-numRightGuesses))/lenAnswer)*(self.MAXZOOM-1)+1)
+            correctGuesses += lastChar
+            answerField.text = replace(str: currentText, indices: indices, char: Character(lastChar))
+            currentText = answerField.text!
+            let curEffect = (uniqueLetters-numRightGuesses)/uniqueLetters
+            image.image = ImageFilters.filters.applyFilters(blurValue: (blur*curEffect), brightnessValue: (brightness*curEffect), image: CIImage(cgImage: (finalImage.cgImage!)))
+            self.scrollView.zoomScale = CGFloat((self.zoom*curEffect)*(self.MAXZOOM-1)+1)
         } else {
+            answerField.text = currentText
             numWrongGuesses += 1
-            if (numWrongGuesses == 3) {
-                // game over
+            if (numWrongGuesses == 1) {
+                life3.isHidden = true
+            } else if (numWrongGuesses == 2) {
+                life2.isHidden = true
             } else {
-                
+                life1.isHidden = true
+                // game over
             }
         }
         

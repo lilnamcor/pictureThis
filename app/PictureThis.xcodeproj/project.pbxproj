@@ -12,6 +12,8 @@
 		59AC323F1E08E02F0011882F /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AC323E1E08E02F0011882F /* CameraController.swift */; };
 		59DE635C1DFD145800B324E2 /* LogInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DE635B1DFD145800B324E2 /* LogInController.swift */; };
 		5F0F55931DFE147500FC5257 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0F55921DFE147500FC5257 /* SignUpController.swift */; };
+		5F9717731E52BC9E002C69B2 /* Keyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F9717721E52BC9E002C69B2 /* Keyboard.xib */; };
+		5F9717751E52BDE4002C69B2 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9717741E52BDE4002C69B2 /* Keyboard.swift */; };
 		5F999C221E4A7AF500B1B8F7 /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F999C211E4A7AF500B1B8F7 /* GameController.swift */; };
 		5FAC2C821E08E64000E539BF /* FriendsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAC2C811E08E64000E539BF /* FriendsListController.swift */; };
 		5FC63A251E0C71F1004423BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FC63A231E0C71F1004423BE /* Main.storyboard */; };
@@ -48,6 +50,8 @@
 		59AC323E1E08E02F0011882F /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		59DE635B1DFD145800B324E2 /* LogInController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInController.swift; sourceTree = "<group>"; };
 		5F0F55921DFE147500FC5257 /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
+		5F9717721E52BC9E002C69B2 /* Keyboard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Keyboard.xib; sourceTree = "<group>"; };
+		5F9717741E52BDE4002C69B2 /* Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		5F999C211E4A7AF500B1B8F7 /* GameController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
 		5FAC2C811E08E64000E539BF /* FriendsListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsListController.swift; sourceTree = "<group>"; };
 		5FC63A241E0C71F1004423BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -123,6 +127,8 @@
 				5FEC42E41E0F710C007CC2F8 /* ImageFilters.swift */,
 				5FF909461E0EF6C600182BED /* CameraOperations.swift */,
 				5FC63A231E0C71F1004423BE /* Main.storyboard */,
+				5F9717721E52BC9E002C69B2 /* Keyboard.xib */,
+				5F9717741E52BDE4002C69B2 /* Keyboard.swift */,
 				5F999C211E4A7AF500B1B8F7 /* GameController.swift */,
 				59AC323A1E08DF060011882F /* NotificationsController.swift */,
 				59AC32381E08DED10011882F /* SettingsController.swift */,
@@ -262,6 +268,7 @@
 			files = (
 				5FC63A251E0C71F1004423BE /* Main.storyboard in Resources */,
 				5FD99C641DF512CF00D24256 /* LaunchScreen.storyboard in Resources */,
+				5F9717731E52BC9E002C69B2 /* Keyboard.xib in Resources */,
 				5FD99C611DF512CF00D24256 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,6 +304,7 @@
 				5FD99C5A1DF512CF00D24256 /* AppDelegate.swift in Sources */,
 				5F999C221E4A7AF500B1B8F7 /* GameController.swift in Sources */,
 				59AC323F1E08E02F0011882F /* CameraController.swift in Sources */,
+				5F9717751E52BDE4002C69B2 /* Keyboard.swift in Sources */,
 				5F0F55931DFE147500FC5257 /* SignUpController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
