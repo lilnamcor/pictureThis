@@ -382,6 +382,8 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
             disableButton(element: zoom)
             disableButton(element: brightness)
             disableButton(element: blur)
+            // comment out next line, it is used to make it work locally
+            ImageFilters.filters.setBlurImage(image: CIImage(color: CIColor.black()))
             answer.isHidden = true
             slider.isHidden = true
             slider.isEnabled = false
