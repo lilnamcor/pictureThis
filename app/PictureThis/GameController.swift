@@ -9,15 +9,6 @@
 import UIKit
 
 class GameController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
-
-    /*
-    func keyWasTapped(character: String) {
-        print(character)
-        print(answerField.text)
-        checkLetter(lastChar: character.lowercased())
-        print(answerField.text)
-    }
- */
     
     var currentFriend = ""
     var answer = ""
@@ -136,7 +127,6 @@ class GameController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     func textFieldDidChange(_ textField: UITextField) {
         let text = answerField.text
         let lastChar = text?.substring(from:(text?.index((text?.endIndex)!, offsetBy: -1))!)
-        print(lastChar)
         let indexCorrect = correctGuesses.lowercased().range(of:lastChar!)
         var indices = [Int]()
         var count = 0

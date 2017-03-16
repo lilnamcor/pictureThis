@@ -276,6 +276,9 @@ class SettingsController: UIViewController, UITextFieldDelegate, UITableViewData
         }
     }
     
+    @IBAction func LogOutAction(_ sender: Any) {
+        UserDefaults.standard.set(false, forKey: "loggedIn")
+    }
 
     /*
     // MARK: - Navigation

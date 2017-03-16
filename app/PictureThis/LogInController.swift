@@ -61,6 +61,14 @@ class LogInController: UIViewController, UITextFieldDelegate {
         }
         return true
     }
+
+    @IBAction func LoginAction(_ sender: Any) {
+        UserDefaults.standard.set(true, forKey: "loggedIn")
+    }
+    
+    @IBAction func LoginFacebookAction(_ sender: Any) {
+        UserDefaults.standard.set(true, forKey: "loggedIn")
+    }
     
     @IBAction func eraseUsername(_ sender: Any) {
         if (usernameBool == false) {

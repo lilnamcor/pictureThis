@@ -24,7 +24,7 @@
                     </view>
                     <connections>
                         <segue destination="V4Q-qI-C97" kind="show" identifier="Camera" id="U1M-Hh-DYX"/>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="Home" id="H4y-A1-pmb"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="Home" id="Cb5-SU-JbU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uj0-jp-Ie0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -151,6 +151,7 @@
                                     <color key="titleColor" red="0.16754804109999999" green="0.27918077079999998" blue="0.58342778500000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
+                                    <action selector="LoginFacebookAction:" destination="lSw-Lj-1E8" eventType="touchUpInside" id="sgZ-cu-imp"/>
                                     <segue destination="V4Q-qI-C97" kind="show" id="4jR-38-M5X"/>
                                 </connections>
                             </button>
@@ -176,6 +177,7 @@
                                     <color key="titleColor" red="0.98979773230000001" green="0.98996160730000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
+                                    <action selector="LoginAction:" destination="lSw-Lj-1E8" eventType="touchUpInside" id="rwf-gY-XMC"/>
                                     <segue destination="V4Q-qI-C97" kind="show" id="Xb9-Vh-6rJ"/>
                                 </connections>
                             </button>
@@ -579,6 +581,7 @@
                                             <color key="titleColor" red="0.16754804109999999" green="0.27918077079999998" blue="0.58342778500000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
+                                            <action selector="SignUpFacebookAction:" destination="xpS-1l-9wM" eventType="touchUpInside" id="Wj4-GD-xqb"/>
                                             <segue destination="V4Q-qI-C97" kind="show" id="DfY-az-U1h"/>
                                         </connections>
                                     </button>
@@ -616,6 +619,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="SignUpAction:" destination="xpS-1l-9wM" eventType="touchUpInside" id="jds-6R-4GE"/>
                                     <segue destination="V4Q-qI-C97" kind="show" id="JS4-SP-tdf"/>
                                 </connections>
                             </button>
@@ -719,16 +723,27 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fBm-ua-MlO">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBT-os-Ygi">
+                                        <rect key="frame" x="314" y="24" width="53" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Edit"/>
+                                        <connections>
+                                            <action selector="editAction:" destination="B0k-n0-8hh" eventType="touchUpInside" id="rkl-zR-ha4"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="He4-je-s2t">
+                                        <rect key="frame" x="310" y="629" width="55" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Log Out"/>
+                                        <connections>
+                                            <action selector="LogOutAction:" destination="B0k-n0-8hh" eventType="touchUpInside" id="OyH-an-DhJ"/>
+                                            <segue destination="BYZ-38-t0r" kind="show" id="Pz5-zp-7AX"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBT-os-Ygi">
-                                <rect key="frame" x="306" y="24" width="53" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Edit"/>
-                                <connections>
-                                    <action selector="editAction:" destination="B0k-n0-8hh" eventType="touchUpInside" id="rkl-zR-ha4"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w06-c9-xjt">
                                 <rect key="frame" x="156" y="28" width="64" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -880,9 +895,9 @@
         <image name="picturethis" width="626" height="626"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Dxn-IB-7jk"/>
         <segue reference="3BP-zb-opO"/>
+        <segue reference="U1M-Hh-DYX"/>
+        <segue reference="Cb5-SU-JbU"/>
         <segue reference="vqW-lW-UuY"/>
-        <segue reference="H4y-A1-pmb"/>
     </inferredMetricsTieBreakers>
 </document>

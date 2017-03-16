@@ -76,7 +76,7 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
         monthTable.allowsMultipleSelection = false
         dayTable.allowsMultipleSelection = false
         yearTable.allowsMultipleSelection = false
-                
+        
         monthTable.isHidden = true
         dayTable.isHidden = true
         yearTable.isHidden = true
@@ -85,6 +85,14 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
         let path = IndexPath(row: 20, section: 0)
         
         yearTable.scrollToRow(at: path, at: .top, animated: false)
+    }
+    
+    @IBAction func SignUpAction(_ sender: Any) {
+        UserDefaults.standard.set(true, forKey: "loggedIn")
+    }
+    
+    @IBAction func SignUpFacebookAction(_ sender: Any) {
+        UserDefaults.standard.set(true, forKey: "loggedIn")
     }
     
     func minimizeKeyboard(_ sender: UITapGestureRecognizer) {
