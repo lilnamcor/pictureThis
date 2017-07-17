@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="T0n-Hs-uu6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="T0n-Hs-uu6">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -152,7 +152,6 @@
                                 </state>
                                 <connections>
                                     <action selector="LoginFacebookAction:" destination="lSw-Lj-1E8" eventType="touchUpInside" id="sgZ-cu-imp"/>
-                                    <segue destination="V4Q-qI-C97" kind="show" id="4jR-38-M5X"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="picturethis" translatesAutoresizingMaskIntoConstraints="NO" id="uLT-YD-2GE">
@@ -178,7 +177,6 @@
                                 </state>
                                 <connections>
                                     <action selector="LoginAction:" destination="lSw-Lj-1E8" eventType="touchUpInside" id="rwf-gY-XMC"/>
-                                    <segue destination="V4Q-qI-C97" kind="show" id="Xb9-Vh-6rJ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -191,6 +189,7 @@
                         <outlet property="logInFacebook" destination="7ZP-Uo-NY8" id="wPK-h0-ntU"/>
                         <outlet property="logo" destination="uLT-YD-2GE" id="77P-8e-mbg"/>
                         <outlet property="signUp" destination="kcR-8b-ZlO" id="ZUJ-ae-49H"/>
+                        <segue destination="V4Q-qI-C97" kind="showDetail" identifier="camera" id="bzF-2E-5F7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xRs-s9-t5d" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -602,13 +601,13 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Email" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HE6-s8-sY6">
-                                <rect key="frame" x="37" y="290" width="300" height="30"/>
+                                <rect key="frame" x="37" y="292" width="300" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="eraseEmail:" destination="xpS-1l-9wM" eventType="editingDidEnd" id="pFc-LF-oaO"/>
+                                    <action selector="eraseEmail:" destination="xpS-1l-9wM" eventType="touchDown" id="haD-gZ-6Kt"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CuD-Ox-lZE">
@@ -630,11 +629,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="erasePassword:" destination="xpS-1l-9wM" eventType="editingDidEnd" id="nkR-eJ-w2v"/>
+                                    <action selector="erasePassword:" destination="xpS-1l-9wM" eventType="touchDown" id="lST-EH-vOp"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="First Name" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JoS-Uw-8s3">
-                                <rect key="frame" x="37" y="200" width="300" height="30"/>
+                                <rect key="frame" x="37" y="190" width="300" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -644,13 +643,23 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Last Name" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bxa-FS-oAx">
-                                <rect key="frame" x="37" y="236" width="300" height="30"/>
+                                <rect key="frame" x="37" y="224" width="300" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <action selector="eraseLast:" destination="xpS-1l-9wM" eventType="touchDown" id="cdL-3c-pQC"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="User Name" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XfS-J0-bsf">
+                                <rect key="frame" x="37" y="258" width="300" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="eraseUsername:" destination="xpS-1l-9wM" eventType="touchDown" id="ydv-tz-0VV"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rhg-Qn-Ynp">
@@ -700,6 +709,7 @@
                         <outlet property="sexField" destination="egw-1y-EYg" id="ejr-kI-gGH"/>
                         <outlet property="signUp" destination="CuD-Ox-lZE" id="1qU-Fi-KdC"/>
                         <outlet property="topView" destination="Kw3-Kw-pgn" id="T07-ne-9ec"/>
+                        <outlet property="username" destination="XfS-J0-bsf" id="R1k-8a-Kvk"/>
                         <outlet property="year" destination="Doc-My-dMG" id="kJv-wp-Bot"/>
                         <outlet property="yearTable" destination="kXI-X1-ZsY" id="vv7-RO-6yh"/>
                     </connections>
@@ -895,9 +905,9 @@
         <image name="picturethis" width="626" height="626"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="khM-za-NPX"/>
+        <segue reference="XPY-qz-m2H"/>
+        <segue reference="bzF-2E-5F7"/>
         <segue reference="3BP-zb-opO"/>
-        <segue reference="U1M-Hh-DYX"/>
-        <segue reference="Cb5-SU-JbU"/>
-        <segue reference="vqW-lW-UuY"/>
     </inferredMetricsTieBreakers>
 </document>

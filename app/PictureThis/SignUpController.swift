@@ -13,6 +13,7 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var firstName: UITextField!
     @IBOutlet weak var lastName: UITextField!
+    @IBOutlet weak var username: UITextField!
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var sexField: UISegmentedControl!
@@ -37,11 +38,13 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
     
     var firstNameBool: Bool = false
     var lastNameBool: Bool = false
-    var firstNameActive: Bool = false
-    var lastNameActive: Bool = false
-    
+    var usernameBool: Bool = false
     var emailBool: Bool = false
     var passwordBool: Bool = false
+    
+    var firstNameActive: Bool = false
+    var lastNameActive: Bool = false
+    var usernameActive: Bool = false
     var emailActive: Bool = false
     var passwordActive: Bool = false
     
@@ -63,6 +66,7 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
         
         firstName.delegate = self
         lastName.delegate = self
+        username.delegate = self
         email.delegate = self
         password.delegate = self
         monthTable.delegate = self
@@ -85,14 +89,18 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
         let path = IndexPath(row: 20, section: 0)
         
         yearTable.scrollToRow(at: path, at: .top, animated: false)
+        
+        password.isSecureTextEntry = true
     }
     
     @IBAction func SignUpAction(_ sender: Any) {
         UserDefaults.standard.set(true, forKey: "loggedIn")
+        signup()
     }
     
     @IBAction func SignUpFacebookAction(_ sender: Any) {
         UserDefaults.standard.set(true, forKey: "loggedIn")
+        signup()
     }
     
     func minimizeKeyboard(_ sender: UITapGestureRecognizer) {
@@ -103,6 +111,10 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
         else if (lastNameActive) {
             lastNameActive = false
             lastName.resignFirstResponder()
+        }
+        else if (usernameActive) {
+            usernameActive = false
+            username.resignFirstResponder()
         }
         else if (emailActive) {
             emailActive = false
@@ -122,6 +134,9 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
         }
         else if (textField == lastName) {
             lastName.textColor = UIColor.black
+        }
+        else if (textField == username) {
+            username.textColor = UIColor.black
         }
         else if (textField == email) {
             email.textColor = UIColor.black
@@ -163,6 +178,55 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
         return true
     }
     
+    func sha256Data(_ data: Data) -> Data? {
+        guard let res = NSMutableData(length: Int(CC_SHA256_DIGEST_LENGTH)) else { return nil }
+        CC_SHA256((data as NSData).bytes, CC_LONG(data.count), res.mutableBytes.assumingMemoryBound(to: UInt8.self))
+        return res as Data
+    }
+    
+    func sha256(_ str: String) -> String? {
+        guard
+            let data = str.data(using: String.Encoding.utf8),
+            let shaData = sha256Data(data)
+            else { return nil }
+        let rc = shaData.base64EncodedString(options: [])
+        return rc
+    }
+    
+    func signup() {
+        UserDefaults.standard.set(true, forKey: "loggedIn")
+        var request = URLRequest(url: URL(string: "http://localhost:8080/login")!)
+        request.httpMethod = "POST"
+        let selectedMonth = (self.month.titleLabel?.text)! as String
+        let postString = "username=".appending(username.text!).appending("&password=").appending(sha256(password.text!)!).appending("&first=").appending(firstName.text!).appending("&last=").appending(lastName.text!).appending("&email=").appending(email.text!).appending("&birthday=").appending(String(months.index(of: selectedMonth)!+1)).appending("/").appending((self.day.titleLabel?.text)!).appending("/").appending((self.day.titleLabel?.text)!)
+        request.httpBody = postString.data(using: .utf8)
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                print("error=\(error)")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response)")
+            }
+            
+            let responseString = String(data: data, encoding: .utf8)
+            print("responseString = \(responseString)")
+            if (responseString == "fail") {
+                print("TRY AGAIN")
+                print(self.month.titleLabel?.text)
+                print(self.months.index(of: "Jan"))
+                print(self.day.titleLabel?.text)
+                print(self.year.titleLabel?.text)
+            } else {
+                self.performSegue(withIdentifier: "camera", sender:self)
+            }
+            
+        }
+        task.resume()
+    }
+    
     @IBAction func eraseFirst(_ sender: Any) {
         if (firstNameBool == false) {
             firstName.text = ""
@@ -177,6 +241,14 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
         }
         lastNameActive = true
         lastNameBool = true
+    }
+    
+    @IBAction func eraseUsername(_ sender: Any) {
+        if (usernameBool == false) {
+            username.text = ""
+        }
+        usernameActive = true
+        usernameBool = true
     }
     
     @IBAction func eraseEmail(_ sender: Any) {
@@ -194,6 +266,7 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
         passwordActive = true
         passwordBool = true
     }
+    
     
     @IBAction func monthAction(_ sender: Any) {
         monthTable.isHidden = false

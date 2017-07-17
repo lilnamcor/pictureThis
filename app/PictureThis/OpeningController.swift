@@ -12,7 +12,9 @@ class OpeningController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let loggedIn = UserDefaults.standard.bool(forKey: "loggedIn")
+        var loggedIn = UserDefaults.standard.bool(forKey: "loggedIn")
+        loggedIn = false
+        
         // Do any additional setup after loading the view.
         if (loggedIn) {
             DispatchQueue.main.async {
@@ -23,6 +25,7 @@ class OpeningController: UIViewController {
                 self.performSegue(withIdentifier: "Home", sender: self)
             }
         }
+        
     }
 
     override func didReceiveMemoryWarning() {

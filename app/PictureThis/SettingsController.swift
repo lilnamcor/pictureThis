@@ -14,6 +14,7 @@ class SettingsController: UIViewController, UITextFieldDelegate, UITableViewData
     @IBOutlet weak var logo: UIImageView!
     @IBOutlet weak var firstName: UITextField!
     @IBOutlet weak var lastName: UITextField!
+    
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var gender: UISegmentedControl!

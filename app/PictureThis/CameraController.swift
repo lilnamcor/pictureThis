@@ -424,8 +424,46 @@ class CameraController: UIViewController, UITextFieldDelegate, UIScrollViewDeleg
             friendsListController.answer = answer.text! as NSString
             friendsListController.xOffset = scrollView.contentOffset.x
             friendsListController.yOffset = scrollView.contentOffset.y
+            let myUrl = URL(string: "http://2974fdd6.ngrok.io/");
+            
+            let request = NSMutableURLRequest(url:myUrl!);
+            request.httpMethod = "POST";
+            
+            let param = [
+                "firstName"  : "Sergey",
+                "lastName"    : "Kargopolov",
+                "userId"    : "9"
+            ]
+            
+            let boundary = Http.generateBoundaryString()
+            
+            
+            request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+            
+            
+            let imageData = UIImageJPEGRepresentation(imageView.image!, 1)
+            
+            if(imageData==nil)  { return; }
+            
+            request.httpBody = Http.createBodyWithParameters(parameters: param, filePathKey: "file", imageDataKey: imageData! as NSData, boundary: boundary) as Data
+            
+            let session = URLSession.shared
+            let task = session.dataTask(with: request as URLRequest) {(data, response, error) in
+                
+                guard let _:Data = data, let _:URLResponse = response  , error == nil else {
+                    print("error")
+                    return
+                }
+                
+                let dataString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+                
+                print(dataString)            
+            }
+            task.resume()
         }
     }
+    
+    
     
     func imageTapped(img: AnyObject)
     {
