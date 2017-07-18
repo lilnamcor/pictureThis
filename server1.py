@@ -19,7 +19,7 @@
 import cyclone.web
 import sys
 #
-from twisted.internet import reactor
+from twisted.internet import defer, reactor
 from twisted.python import log
 from twisted.enterprise import adbapi
 
@@ -36,85 +36,70 @@ class MainHandler(cyclone.web.RequestHandler):
         self.write("Fuck this gay earth")
 
 class LoginHandler(cyclone.web.RequestHandler):
-    def post(self):
-        username_arg = self.get_argument('username', None)
-        password_arg = self.get_argument('password', None)
-        # read from some DB
-        f = open('confidential.txt', 'r')
-        for line in f:
-            split = line.split(',')
-            username = split[0]
-            password = split[1]
-            if username == username_arg:
-                if password == password_arg:
-                    self.write("success")
-                    break
-                else:
-                    self.write("fail")
-                    break
-        print username_arg
-        print password_arg
-        print self.request.uri
-        self.write("fail")
 
-def create_entry(*args):
-    toReturn = ""
-    for elem in args:
-        if elem == None:
-            return None
-        toReturn += elem + ","
-    return toReturn[:-1] + '\n'
+    @defer.inlineCallbacks
+    def post(self):
+        username = self.get_argument('username')
+        password = self.get_argument('password')
+        user = yield cp.runQuery("SELECT id FROM users WHERE username='" + username + "' and password=" + password + "'")
+        if len(user) == 1:
+            self.write("SUCCESS")
+        else:
+            self.write("FAIL")
+
+def create_users_table_entry(username, password, first, last, email, gender, dob):
+    stmt = "INSERT INTO USERS (username,password,first,last,email,gender,dob) VALUES ('"
+    stmt += username + "','"
+    stmt += password + "','"
+    stmt += first + "','"
+    stmt += last + "','"
+    stmt += email + "','"
+    stmt += gender + "','"
+    stmt += dob + "')"
+    return stmt
+
 
 class SignUpHandler(cyclone.web.RequestHandler):
+
+    @defer.inlineCallbacks
     def post(self):
+        cp = adbapi.ConnectionPool("pyPgSQL.PgSQL", database="itaireuveni")
         a = datetime.now()
-        print self.request.uri
-        username_arg = self.get_argument('username', None)
-        password_arg = self.get_argument('password', None)
-        first = self.get_argument('first', None)
-        last = self.get_argument('last', None)
-        email = self.get_argument('email', None)
-        birthday = self.get_argument('birthday', None)
-        f = open('confidential.txt', 'r')
-        for line in f:
-            split = line.split(',')
-            username = split[0]
-            if username == username_arg:
-                self.write("exists")
-                return
-        f = open('confidential.txt', 'a')
-        entry = create_entry(username_arg, password_arg, first, last, email, birthday)
-        if entry:
-            f.write(entry)
-            f.close()
-            print datetime.now() - a
-            self.write("success")
+        username = self.get_argument('username')
+        user = yield cp.runQuery("SELECT id FROM users WHERE username='" + username + "'")
+        if len(user) > 0:
+            self.write("ALREADY EXISTS")
         else:
-            print datetime.now() - a
-            self.write("fail")
+            password = self.get_argument('password')
+            first = self.get_argument('first')
+            last = self.get_argument('last')
+            email = self.get_argument('email')
+            gender = self.get_argument('gender')
+            dob = self.get_argument('dob')
+            try:
+                stmt = create_users_table_entry(username, password, first, last, email, gender, dob)
+                cp.runOperation(stmt)
+                self.write("SUCCESS")
+            except:
+                self.write("ERROR")
 
 class FriendHandler(cyclone.web.RequestHandler):
 
-    def printResult(l):
-        print "HELLO MOTO"
-        print l
-        if l:
-            print "CUINT"
-        else:
-            print "No such user"
-
+    @defer.inlineCallbacks
     def get(self):
         cp = adbapi.ConnectionPool("pyPgSQL.PgSQL", database="itaireuveni")
-        print cp
         try:
-            temp = cp.runQuery("SELECT * FROM users").addCallback(printResult)
-            print "SHIT"
-            print temp
-            temp
-            self.write("FUCK OFF")
-            self.write(cyclone.web.RequestHandler.get_argument(self, "self"))
+            username = self.get_argument('username')
+            # get list of this users friends
+            friends = yield cp.runQuery("SELECT friends FROM users WHERE username='" + username + "'")
+            list_of_friends = []
+            for user in friends:
+                first_name = yield cp.runQuery("SELECT first FROM users WHERE id='" + user[0] + "'")
+                list_of_friends.append(first_name[0])
+            self.write('SUCCESS')
+            self.write(','.join(name for name in first_name))
         except:
-            print "FUCK"
+            print "ERROR"
 
 
 if __name__ == "__main__":
