@@ -24,6 +24,7 @@ from twisted.python import log
 from twisted.enterprise import adbapi
 
 from datetime import datetime
+import json
 #
 #
 class MainHandler(cyclone.web.RequestHandler):
@@ -39,9 +40,10 @@ class LoginHandler(cyclone.web.RequestHandler):
 
     @defer.inlineCallbacks
     def post(self):
+        cp = adbapi.ConnectionPool("pyPgSQL.PgSQL", database="itaireuveni")
         username = self.get_argument('username')
         password = self.get_argument('password')
-        user = yield cp.runQuery("SELECT id FROM users WHERE username='" + username + "' and password=" + password + "'")
+        user = yield cp.runQuery("SELECT id FROM users WHERE username='" + username + "' and password='" + password + "'")
         if len(user) == 1:
             self.write("SUCCESS")
         else:
@@ -93,11 +95,11 @@ class FriendHandler(cyclone.web.RequestHandler):
             # get list of this users friends
             friends = yield cp.runQuery("SELECT friends FROM users WHERE username='" + username + "'")
             list_of_friends = []
-            for user in friends:
-                first_name = yield cp.runQuery("SELECT first FROM users WHERE id='" + user[0] + "'")
-                list_of_friends.append(first_name[0])
+            for user in json.loads(friends[0][0]):
+                first_name = yield cp.runQuery("SELECT first FROM users WHERE id='" + str(user) + "'")
+                list_of_friends.append(first_name[0][0])
             self.write('SUCCESS')
-            self.write(','.join(name for name in first_name))
+            self.write(','.join(name for name in list_of_friends))
         except:
             print "ERROR"
 

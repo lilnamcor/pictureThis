@@ -51,6 +51,34 @@ class FriendsListController: UIViewController, UITableViewDataSource, UITableVie
         friendsList.dataSource = self
         friendsList.allowsMultipleSelection = true
         
+        let username = UserDefaults.standard.string(forKey: "username")
+        var request = URLRequest(url: URL(string: "http://localhost:8080/friends")!)
+        request.httpMethod = "GET"
+        print("WE IN HERE")
+        let parameterString = "username=".appending(username!)
+        request.httpBody = parameterString.data(using: .utf8)
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                print("error=\(error)")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response)")
+            }
+            
+            let responseString = String(data: data, encoding: .utf8)
+            print("responseString = \(responseString)")
+            if (responseString == "fail") {
+                print("TRY AGAIN")
+            } else {
+                print(responseString)
+            }
+            
+        }
+        task.resume()
+        
         allFriends = ["Abhi", "Akhil", "Amna", "Byran", "Danielle", "Davit", "Erica", "Jas", "Logan", "Navin", "Ross", "Tim", "Melissa Hsu", "Megan", "Hannah"]
         displayedFriends = allFriends
         

@@ -104,6 +104,7 @@ class LogInController: UIViewController, UITextFieldDelegate {
             if (responseString == "fail") {
                 print("TRY AGAIN")
             } else {
+                UserDefaults.standard.set(self.username.text!, forKey: "username")
                 self.performSegue(withIdentifier: "camera", sender:self)
             }
             

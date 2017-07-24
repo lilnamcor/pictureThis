@@ -52,6 +52,8 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
     var dayVal = ""
     var yearVal = ""
     
+    var sex = "0"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         signUp.layer.cornerRadius = 5
@@ -102,6 +104,17 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
         UserDefaults.standard.set(true, forKey: "loggedIn")
         signup()
     }
+    
+    @IBAction func indexChanged(sender : UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            sex = "0"
+        case 1:
+            sex = "1"
+        default:
+            break;
+        }  //Switch
+    } // indexChanged for the Segmented Control
     
     func minimizeKeyboard(_ sender: UITapGestureRecognizer) {
         if (firstNameActive) {
@@ -195,10 +208,10 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
     
     func signup() {
         UserDefaults.standard.set(true, forKey: "loggedIn")
-        var request = URLRequest(url: URL(string: "http://localhost:8080/login")!)
+        var request = URLRequest(url: URL(string: "http://localhost:8080/signup")!)
         request.httpMethod = "POST"
         let selectedMonth = (self.month.titleLabel?.text)! as String
-        let postString = "username=".appending(username.text!).appending("&password=").appending(sha256(password.text!)!).appending("&first=").appending(firstName.text!).appending("&last=").appending(lastName.text!).appending("&email=").appending(email.text!).appending("&birthday=").appending(String(months.index(of: selectedMonth)!+1)).appending("/").appending((self.day.titleLabel?.text)!).appending("/").appending((self.day.titleLabel?.text)!)
+        let postString = "username=".appending(username.text!).appending("&password=").appending(sha256(password.text!)!).appending("&first=").appending(firstName.text!).appending("&last=").appending(lastName.text!).appending("&email=").appending(email.text!).appending("&gender=").appending(sex).appending("&dob=").appending(String(months.index(of: selectedMonth)!+1)).appending("/").appending((self.day.titleLabel?.text)!).appending("/").appending((self.day.titleLabel?.text)!)
         request.httpBody = postString.data(using: .utf8)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {                                                 // check for fundamental networking error
@@ -220,6 +233,7 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
                 print(self.day.titleLabel?.text)
                 print(self.year.titleLabel?.text)
             } else {
+                UserDefaults.standard.set(self.username.text!, forKey: "username")
                 self.performSegue(withIdentifier: "camera", sender:self)
             }
             
