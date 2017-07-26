@@ -18,6 +18,8 @@
 #
 import cyclone.web
 import sys
+
+from settings import DATABASES
 #
 from twisted.internet import defer, reactor
 from twisted.python import log
@@ -25,8 +27,16 @@ from twisted.enterprise import adbapi
 
 from datetime import datetime
 import json
-#
-#
+
+dbpool = adbapi.ConnectionPool(
+    DATABASES['default']['ENGINE'],
+    database=DATABASES['default']['NAME'],
+    port=DATABASES['default']['PORT'],
+    user=DATABASES['default']['USER'],
+    password=DATABASES['default']['PASSWORD'],
+    host=DATABASES['default']['HOST']
+)
+
 class PictureHandler(cyclone.web.RequestHandler):
     def get(self):
         self.get_argument('user_id')
@@ -41,10 +51,9 @@ class LoginHandler(cyclone.web.RequestHandler):
 
     @defer.inlineCallbacks
     def post(self):
-        cp = adbapi.ConnectionPool("pyPgSQL.PgSQL", database="itaireuveni")
         username = self.get_argument('username')
         password = self.get_argument('password')
-        user = yield cp.runQuery("SELECT id FROM users WHERE username='" + username + "' and password='" + password + "'")
+        user = yield dbpool.runQuery("SELECT id FROM users WHERE username='" + username + "' and password='" + password + "'")
         if len(user) == 1:
             self.write("SUCCESS")
             # send unique_id to app
@@ -68,10 +77,9 @@ class SignUpHandler(cyclone.web.RequestHandler):
 
     @defer.inlineCallbacks
     def post(self):
-        cp = adbapi.ConnectionPool("pyPgSQL.PgSQL", database="itaireuveni")
         a = datetime.now()
         username = self.get_argument('username')
-        user = yield cp.runQuery("SELECT id FROM users WHERE username='" + username + "'")
+        user = yield dbpool.runQuery("SELECT id FROM users WHERE username='" + username + "'")
         if len(user) > 0:
             self.write("ALREADY EXISTS")
         else:
@@ -83,9 +91,9 @@ class SignUpHandler(cyclone.web.RequestHandler):
             dob = self.get_argument('dob')
             try:
                 stmt = create_users_table_entry(username, password, first, last, email, gender, dob)
-                cp.runOperation(stmt)
+                dbpool.runOperation(stmt)
                 self.write("SUCCESS")
-                lastId = yield cp.runQuery("SELECT id FROM users ORDER BY ID DESC LIMIT 1")
+                lastId = yield dbpool.runQuery("SELECT id FROM users ORDER BY ID DESC LIMIT 1")
                 lastId = lastId[0][0]
                 # send unique_id to app
                 self.write(str(lastId))
@@ -96,16 +104,15 @@ class FriendHandler(cyclone.web.RequestHandler):
 
     @defer.inlineCallbacks
     def get(self):
-        cp = adbapi.ConnectionPool("pyPgSQL.PgSQL", database="itaireuveni")
         try:
             user_id = self.get_argument('id')
             password = self.get_argument('password')
             # get list of this users friends
-            friends = yield cp.runQuery("SELECT friends FROM users WHERE id=" + user_id + " and password='" + password + "'")
+            friends = yield dbpool.runQuery("SELECT friends FROM users WHERE id=" + user_id + " and password='" + password + "'")
             if friends[0][0]:
                 friend_data = []
                 for user in json.loads(friends[0][0]):
-                    first_id = yield cp.runQuery("SELECT first, id FROM users WHERE id='" + str(user) + "'")
+                    first_id = yield dbpool.runQuery("SELECT first, id FROM users WHERE id='" + str(user) + "'")
                     print first_id
                     friend_data.append(first_id[0][0])
                     friend_data.append(str(first_id[0][1]))
@@ -128,5 +135,5 @@ if __name__ == "__main__":
     ])
 
     log.startLogging(sys.stdout)
-    reactor.listenTCP(8080, application, interface="127.0.0.1")
+    reactor.listenTCP(8080, application, interface="0.0.0.0")
     reactor.run()
