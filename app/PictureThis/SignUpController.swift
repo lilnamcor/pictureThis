@@ -211,7 +211,8 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
         var request = URLRequest(url: URL(string: "http://localhost:8080/signup")!)
         request.httpMethod = "POST"
         let selectedMonth = (self.month.titleLabel?.text)! as String
-        let postString = "username=".appending(username.text!).appending("&password=").appending(sha256(password.text!)!).appending("&first=").appending(firstName.text!).appending("&last=").appending(lastName.text!).appending("&email=").appending(email.text!).appending("&gender=").appending(sex).appending("&dob=").appending(String(months.index(of: selectedMonth)!+1)).appending("/").appending((self.day.titleLabel?.text)!).appending("/").appending((self.day.titleLabel?.text)!)
+        let sha_password = sha256(password.text!)!
+        let postString = "username=".appending(username.text!).appending("&password=").appending(sha_password).appending("&first=").appending(firstName.text!).appending("&last=").appending(lastName.text!).appending("&email=").appending(email.text!).appending("&gender=").appending(sex).appending("&dob=").appending(String(months.index(of: selectedMonth)!+1)).appending("/").appending((self.day.titleLabel?.text)!).appending("/").appending((self.day.titleLabel?.text)!)
         request.httpBody = postString.data(using: .utf8)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {                                                 // check for fundamental networking error
@@ -225,18 +226,16 @@ class SignUpController: UIViewController, UITextFieldDelegate, UITableViewDataSo
             }
             
             let responseString = String(data: data, encoding: .utf8)
-            print("responseString = \(responseString)")
             if (responseString == "fail") {
                 print("TRY AGAIN")
-                print(self.month.titleLabel?.text)
-                print(self.months.index(of: "Jan"))
-                print(self.day.titleLabel?.text)
-                print(self.year.titleLabel?.text)
             } else {
                 UserDefaults.standard.set(self.username.text!, forKey: "username")
+                UserDefaults.standard.set(sha_password, forKey: "password")
+                let index = responseString?.index((responseString?.startIndex)!, offsetBy: 7)
+                let user_id = responseString?.substring(from: index!)
+                UserDefaults.standard.set(user_id, forKey: "user_id")
                 self.performSegue(withIdentifier: "camera", sender:self)
             }
-            
         }
         task.resume()
     }

@@ -13,6 +13,7 @@ class NotificationsController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet weak var friendsList: UITableView!
     
     var allFriends = [String]()
+    var allFriendIds = [Int]()
     var displayedFriends = [String]()
     var selectedFriend = String()
     
@@ -25,8 +26,9 @@ class NotificationsController: UIViewController, UITableViewDataSource, UITableV
         friendsList.dataSource = self
         friendsList.allowsMultipleSelection = true
         
-        let username = UserDefaults.standard.string(forKey: "username")
-        let requestString = "http://localhost:8080/friends?username=".appending(username!)
+        let user_id = UserDefaults.standard.string(forKey: "user_id")
+        let password = UserDefaults.standard.string(forKey: "password")
+        let requestString = "http://localhost:8080/friends?id=".appending(user_id!).appending("&password=").appending(password!)
         var request = URLRequest(url: URL(string: requestString)!)
         request.httpMethod = "GET"
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -44,10 +46,17 @@ class NotificationsController: UIViewController, UITableViewDataSource, UITableV
                 print("TRY AGAIN")
             } else {
                 let index = responseString?.index((responseString?.startIndex)!, offsetBy: 7)
-                if (responseString?.substring(to: index!) == "SUCCESS") {
-                    self.allFriends = (responseString?.substring(from: index!).components(separatedBy: ","))!
-                    self.displayedFriends = self.allFriends
+                let friendData = (responseString?.substring(from: index!).components(separatedBy: ","))!
+                var counter = 0
+                for elem in friendData {
+                    if counter % 2 == 0 {
+                        self.allFriends.append(elem)
+                    } else {
+                        self.allFriendIds.append(Int(elem)!)
+                    }
+                    counter += 1
                 }
+                self.displayedFriends = self.allFriends
             }
             
         }
@@ -102,7 +111,6 @@ class NotificationsController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(self.displayedFriends)
         return displayedFriends.count
     }
     

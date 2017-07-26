@@ -13,7 +13,7 @@ class OpeningController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         var loggedIn = UserDefaults.standard.bool(forKey: "loggedIn")
-        //loggedIn = false
+        loggedIn = false
         
         // Do any additional setup after loading the view.
         if (loggedIn) {

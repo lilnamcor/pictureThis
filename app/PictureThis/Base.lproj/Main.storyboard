@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="T0n-Hs-uu6">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="T0n-Hs-uu6">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -329,7 +329,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2XP-7J-ZVo">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2XP-7J-ZVo">
                                 <rect key="frame" x="0.0" y="-1" width="375" height="668"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ydq-aO-9xF">
@@ -581,7 +581,6 @@
                                         </state>
                                         <connections>
                                             <action selector="SignUpFacebookAction:" destination="xpS-1l-9wM" eventType="touchUpInside" id="Wj4-GD-xqb"/>
-                                            <segue destination="V4Q-qI-C97" kind="show" id="DfY-az-U1h"/>
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="picturethis" translatesAutoresizingMaskIntoConstraints="NO" id="Knz-KB-EC3">
@@ -619,7 +618,6 @@
                                 </state>
                                 <connections>
                                     <action selector="SignUpAction:" destination="xpS-1l-9wM" eventType="touchUpInside" id="jds-6R-4GE"/>
-                                    <segue destination="V4Q-qI-C97" kind="show" id="JS4-SP-tdf"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Password" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="53u-Sl-uzt">
@@ -712,6 +710,7 @@
                         <outlet property="username" destination="XfS-J0-bsf" id="R1k-8a-Kvk"/>
                         <outlet property="year" destination="Doc-My-dMG" id="kJv-wp-Bot"/>
                         <outlet property="yearTable" destination="kXI-X1-ZsY" id="vv7-RO-6yh"/>
+                        <segue destination="V4Q-qI-C97" kind="showDetail" identifier="camera" id="SjQ-h9-q9Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eyg-aV-gW0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -905,9 +904,9 @@
         <image name="picturethis" width="626" height="626"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="SjQ-h9-q9Y"/>
         <segue reference="khM-za-NPX"/>
-        <segue reference="XPY-qz-m2H"/>
-        <segue reference="bzF-2E-5F7"/>
+        <segue reference="ZwF-jn-Gex"/>
         <segue reference="3BP-zb-opO"/>
     </inferredMetricsTieBreakers>
 </document>

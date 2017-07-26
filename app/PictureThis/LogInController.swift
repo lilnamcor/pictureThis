@@ -86,7 +86,8 @@ class LogInController: UIViewController, UITextFieldDelegate {
         UserDefaults.standard.set(true, forKey: "loggedIn")
         var request = URLRequest(url: URL(string: "http://localhost:8080/login")!)
         request.httpMethod = "POST"
-        let postString = "username=".appending(username.text!).appending("&password=").appending(sha256(password.text!)!)
+        let sha_password = sha256(password.text!)!
+        let postString = "username=".appending(username.text!).appending("&password=").appending(sha_password)
         request.httpBody = postString.data(using: .utf8)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {                                                 // check for fundamental networking error
@@ -100,14 +101,16 @@ class LogInController: UIViewController, UITextFieldDelegate {
             }
             
             let responseString = String(data: data, encoding: .utf8)
-            print("responseString = \(responseString)")
             if (responseString == "fail") {
                 print("TRY AGAIN")
             } else {
                 UserDefaults.standard.set(self.username.text!, forKey: "username")
+                UserDefaults.standard.set(sha_password, forKey: "password")
+                let index = responseString?.index((responseString?.startIndex)!, offsetBy: 7)
+                let user_id = responseString?.substring(from: index!)
+                UserDefaults.standard.set(user_id, forKey: "user_id")
                 self.performSegue(withIdentifier: "camera", sender:self)
             }
-            
         }
         task.resume()
     }

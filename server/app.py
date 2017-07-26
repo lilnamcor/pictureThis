@@ -27,14 +27,15 @@ from datetime import datetime
 import json
 #
 #
-class MainHandler(cyclone.web.RequestHandler):
+class PictureHandler(cyclone.web.RequestHandler):
     def get(self):
-        self.write("Hello, world")
+        self.get_argument('user_id')
+        self.get_argument('password')
 
     def post(self):
-        print self.get_argument('username', 'No data received')
-        print self.get_argument('password', 'No data received')
-        self.write("Fuck this gay earth")
+        self.get_argument('user_id')
+        self.get_argument('password')
+        self.get_argument('friend_ids')
 
 class LoginHandler(cyclone.web.RequestHandler):
 
@@ -46,6 +47,8 @@ class LoginHandler(cyclone.web.RequestHandler):
         user = yield cp.runQuery("SELECT id FROM users WHERE username='" + username + "' and password='" + password + "'")
         if len(user) == 1:
             self.write("SUCCESS")
+            # send unique_id to app
+            self.write(str(user[0][0]))
         else:
             self.write("FAIL")
 
@@ -82,6 +85,10 @@ class SignUpHandler(cyclone.web.RequestHandler):
                 stmt = create_users_table_entry(username, password, first, last, email, gender, dob)
                 cp.runOperation(stmt)
                 self.write("SUCCESS")
+                lastId = yield cp.runQuery("SELECT id FROM users ORDER BY ID DESC LIMIT 1")
+                lastId = lastId[0][0]
+                # send unique_id to app
+                self.write(str(lastId))
             except:
                 self.write("ERROR")
 
@@ -91,22 +98,30 @@ class FriendHandler(cyclone.web.RequestHandler):
     def get(self):
         cp = adbapi.ConnectionPool("pyPgSQL.PgSQL", database="itaireuveni")
         try:
-            username = self.get_argument('username')
+            user_id = self.get_argument('id')
+            password = self.get_argument('password')
             # get list of this users friends
-            friends = yield cp.runQuery("SELECT friends FROM users WHERE username='" + username + "'")
-            list_of_friends = []
-            for user in json.loads(friends[0][0]):
-                first_name = yield cp.runQuery("SELECT first FROM users WHERE id='" + str(user) + "'")
-                list_of_friends.append(first_name[0][0])
-            self.write('SUCCESS')
-            self.write(','.join(name for name in list_of_friends))
-        except:
+            friends = yield cp.runQuery("SELECT friends FROM users WHERE id=" + user_id + " and password='" + password + "'")
+            if friends[0][0]:
+                friend_data = []
+                for user in json.loads(friends[0][0]):
+                    first_id = yield cp.runQuery("SELECT first, id FROM users WHERE id='" + str(user) + "'")
+                    print first_id
+                    friend_data.append(first_id[0][0])
+                    friend_data.append(str(first_id[0][1]))
+                self.write('SUCCESS')
+                self.write(','.join(name for name in friend_data))
+            else: 
+                self.write("You have no friends")
+                self.set_status(400)
+        except Exception, e:
+            print e
             print "ERROR"
 
 
 if __name__ == "__main__":
     application = cyclone.web.Application([
-        (r"/", MainHandler),
+        (r"/picture", PictureHandler),
         (r"/login", LoginHandler),
         (r"/signup", SignUpHandler),
         (r"/friends", FriendHandler)
