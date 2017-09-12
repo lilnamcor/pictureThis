@@ -8,9 +8,9 @@ WORKDIR /app
 ADD requirements.txt /app
 
 # Install any needed packages specified in requirements.txt
-RUN pip install -r requirements.txt
+RUN pip2 install -r requirements.txt
 
-ADD app.py /app
+COPY . /app
 
 # Make port 80 available to the world outside this container
 EXPOSE 8080

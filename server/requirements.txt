@@ -1,3 +1,4 @@
 cyclone
 twisted
 service_identity
+psycopg2

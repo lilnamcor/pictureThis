@@ -3,7 +3,7 @@ import os
 if 'RDS_HOSTNAME' in os.environ:
     DATABASES = {
         'default': {
-            'ENGINE': 'pyPgSQL.PgSQL',
+            'ENGINE': 'psycopg2',
             'NAME': os.environ['RDS_DB_NAME'],
             'USER': os.environ['RDS_USERNAME'],
             'PASSWORD': os.environ['RDS_PASSWORD'],
@@ -14,7 +14,7 @@ if 'RDS_HOSTNAME' in os.environ:
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'pyPgSQL.PgSQL',
+            'ENGINE': 'psycopg2',
             'NAME': 'itaireuveni',
             'USER': '',
             'PASSWORD': '',
